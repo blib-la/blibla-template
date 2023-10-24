@@ -1,0 +1,22 @@
+{
+  "company": "Firma",
+  "contact": "Kontakt",
+  "cookieBanner": {
+    "acceptAll": "Alle akzeptieren",
+    "acceptNecessary": "Notwendige akzeptieren",
+    "cookieMessage": "Wir verwenden Cookies um das Erlebnis auf dieser App zu verbessern."
+  },
+  "navigation": {
+    "about": "Über Uns",
+    "admin": "Admin",
+    "design": "Design System",
+    "goHome": "Zur Startseite",
+    "home": "Startseite",
+    "imprint": "Impressum",
+    "privacy": "Datenschutz",
+    "profile": "Profil",
+    "terms": "AGB"
+  },
+  "search": "Suche",
+  "user": "User"
+}

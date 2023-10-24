@@ -1,0 +1,22 @@
+{
+  "company": "Company",
+  "contact": "Contact",
+  "cookieBanner": {
+    "acceptAll": "Accept all",
+    "acceptNecessary": "Accept necessary",
+    "cookieMessage": "We use cookies to improve the experience of this app."
+  },
+  "navigation": {
+    "about": "About Us",
+    "admin": "Admin",
+    "design": "Design System",
+    "goHome": "Take Me Home",
+    "home": "Home",
+    "imprint": "Imprint",
+    "privacy": "Privacy Policy",
+    "profile": "Profile",
+    "terms": "Terms"
+  },
+  "search": "Search",
+  "user": "User"
+}

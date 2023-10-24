@@ -1,0 +1,17 @@
+{
+  "cancel": "Cancel",
+  "colorMode": {
+    "dark": "Dark",
+    "light": "Light",
+    "system": "System"
+  },
+  "editProfile": "Edit Profil",
+  "language": "Language",
+  "save": "Save",
+  "signIn": "Sign In",
+  "signInWith": {
+    "github": "Sign in with GitHub",
+    "google": "Sign in with Google"
+  },
+  "signOut": "Sign Out"
+}

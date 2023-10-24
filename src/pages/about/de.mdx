@@ -1,0 +1,16 @@
+import { getStaticProperties } from "@/ions/ssr/get-properties";
+import { MDLayout } from "@/templates/layout/md";
+
+# Über uns
+
+export default function Page({ children }) {
+	return (
+		<MDLayout noIndex>
+			{children}
+		</MDLayout>
+	);
+}
+
+export async function getServerSideProps(context) {
+	return getStaticProperties(context);
+}

@@ -1,0 +1,35 @@
+name: BDD Tests
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  NEXTAUTH_SECRET: e76b6b2d-0107-45af-a3e0-8c7172b361ac
+jobs:
+  cucumber:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version-file: '.nvmrc'
+    - name: Install dependencies
+      run: npm ci
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+    - name: run build
+      run: npm run build
+    - name: run features
+      run: npm run test:ci
+    - uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: cucumber-report
+        path: reports/
+        retention-days: 1

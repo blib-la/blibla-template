@@ -1,0 +1,11 @@
+{
+  "plan": {
+    "BASIC": "Basic",
+    "FREE": "Free",
+    "PREMIUM": "Premium"
+  },
+  "role": {
+    "ADMIN": "Admin",
+    "USER": "User"
+  }
+}

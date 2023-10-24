@@ -1,0 +1,15 @@
+{
+  "bio": {
+    "label": "Biography",
+    "placeholder": "Hello, I am ..."
+  },
+  "language": {
+    "label": "Language",
+    "placeholder": "Please choose"
+  },
+  "name": {
+    "label": "Name",
+    "placeholder": "Jane Doe",
+    "validation": "Please enter your name."
+  }
+}
