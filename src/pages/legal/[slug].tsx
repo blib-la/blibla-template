@@ -6,7 +6,8 @@ import { getValueFromArray } from "@/ions/utils/array";
 import { RichText } from "@/organisms/rich-text";
 import { Layout } from "@/templates/layout";
 import { getClient } from "~/sanity/lib/client";
-import { getPage, pageRouteQuery } from "~/sanity/lib/queries";
+import { getPage } from "~/sanity/lib/get";
+import { pageRouteQuery } from "~/sanity/lib/queries";
 
 export default function Page({ page }: InferGetStaticPropsType<typeof getStaticProps>) {
 	const seo = getValueFromArray(page?.seo);

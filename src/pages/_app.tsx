@@ -18,7 +18,7 @@ import { fetcher } from "@/ions/swr/fetcher";
 import { theme } from "@/ions/theme";
 import { CSS_VARIABLE_PREFIX } from "@/ions/theme/constants";
 import { PWAConfig } from "@/molecules/pwa-config";
-import type { AddressDocument } from "~/sanity/lib/queries";
+import type { AddressDocument } from "~/sanity/lib/types";
 
 const CookieBanner = dynamic(
 	async () => import("@/organisms/cookie-banner").then(module_ => module_.CookieBanner),

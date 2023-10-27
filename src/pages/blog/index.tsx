@@ -8,7 +8,7 @@ import { NavLink } from "@/atoms/nav-link";
 import { getStaticProperties } from "@/ions/ssr/get-properties";
 import { Layout } from "@/templates/layout";
 import { getClient } from "~/sanity/lib/client";
-import { getPosts } from "~/sanity/lib/queries";
+import { getPosts } from "~/sanity/lib/get";
 
 export default function Page({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {
 	return (

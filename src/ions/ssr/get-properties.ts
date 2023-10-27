@@ -5,7 +5,7 @@ import index18Next from "../../../next-i18next.config";
 
 import { uniqueArray } from "@/ions/utils/array";
 import { getClient } from "~/sanity/lib/client";
-import { getAddress, getNavigation } from "~/sanity/lib/queries";
+import { getAddress, getNavigation } from "~/sanity/lib/get";
 
 const { defaultLocale } = index18Next.i18n;
 

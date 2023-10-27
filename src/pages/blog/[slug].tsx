@@ -6,8 +6,9 @@ import { getStaticProperties } from "@/ions/ssr/get-properties";
 import { RichText } from "@/organisms/rich-text";
 import { Layout } from "@/templates/layout";
 import { getClient } from "~/sanity/lib/client";
+import { getPost } from "~/sanity/lib/get";
 import { urlForImage } from "~/sanity/lib/image";
-import { getPost, postSlugsQuery } from "~/sanity/lib/queries";
+import { postSlugsQuery } from "~/sanity/lib/queries";
 
 export async function getStaticProps(context: GetStaticPropsContext) {
 	const client = getClient();
