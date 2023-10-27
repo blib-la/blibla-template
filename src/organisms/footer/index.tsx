@@ -7,12 +7,16 @@ import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 
 import { ResponsiveNavlink } from "@/atoms/nav-link";
+import { useDataContext } from "@/ions/contexts/data";
+import { useNavigationContext } from "@/ions/contexts/navigation";
 import { StyledInlineNav, StyledNav, StyledSection } from "@/organisms/footer/styled";
 import { LanguageSelect } from "@/organisms/language-select";
 
 export function Footer() {
 	const { t } = useTranslation(["common"]);
 	const { data: session } = useSession();
+	const navigation = useNavigationContext();
+	const { address } = useDataContext();
 
 	return (
 		<Sheet component="footer" data-testid="main-footer">
@@ -23,15 +27,40 @@ export function Footer() {
 							<Typography level="title-md" component="h2">
 								{t("common:company")}
 							</Typography>
-							<StyledNav data-testid="footer-navigation">
+							<StyledNav>
 								<ResponsiveNavlink href="/" data-testid="home-link">
 									{t("common:navigation.home")}
 								</ResponsiveNavlink>
-								<ResponsiveNavlink href="/about" data-testid="about-link">
-									{t("common:navigation.about")}
-								</ResponsiveNavlink>
+								{navigation.company.map(link => (
+									<ResponsiveNavlink
+										key={link.href}
+										href={link.href}
+										data-testid="company-link"
+									>
+										{link.label}
+									</ResponsiveNavlink>
+								))}
+							</StyledNav>
+						</StyledSection>
+					</Grid>
+					<Grid xs={1}>
+						<StyledSection data-testid="community-section">
+							<Typography level="title-md" component="h2">
+								{t("common:community")}
+							</Typography>
+							<StyledNav>
 								<ResponsiveNavlink href="/design" data-testid="design-link">
 									{t("common:navigation.design")}
+								</ResponsiveNavlink>
+								<ResponsiveNavlink href="/blog" data-testid="blog-link">
+									{t("common:navigation.blog")}
+								</ResponsiveNavlink>
+								<ResponsiveNavlink
+									href="https://github.com/blib-la"
+									target="_blank"
+									data-testid="github-link"
+								>
+									GitHub
 								</ResponsiveNavlink>
 							</StyledNav>
 						</StyledSection>
@@ -44,12 +73,17 @@ export function Footer() {
 								<Typography level="title-md" component="h2">
 									{t("common:user")}
 								</Typography>
-								<StyledNav data-testid="footer-navigation">
+								<StyledNav>
 									<ResponsiveNavlink href="/profile" data-testid="profile-link">
 										{t("common:navigation.profile")}
 									</ResponsiveNavlink>
 									{session.user.role === Role.ADMIN && (
-										<ResponsiveNavlink href="/admin" data-testid="admin-link">
+										<ResponsiveNavlink
+											href="/admin"
+											locale="en"
+											target="_blank"
+											data-testid="admin-link"
+										>
 											{t("common:navigation.admin")}
 										</ResponsiveNavlink>
 									)}
@@ -62,13 +96,29 @@ export function Footer() {
 							<Typography level="title-md" component="h2">
 								{t("common:contact")}
 							</Typography>
-							<Typography level="body-md">
-								42 Milky Way
-								<br />
-								Local Group 1337
-								<br />
-								Virgo Supercluster
-							</Typography>
+							{address && (
+								<Typography level="body-md" component="div">
+									<div>
+										{[address.streetName, address.houseNumber]
+											.filter(Boolean)
+											.join(" ")}
+									</div>
+									<div>
+										{[address.city, address.zip].filter(Boolean).join(" ")}
+									</div>
+									<div>
+										{[
+											address.province,
+											address.country &&
+												t(`common:country.${address.country}`),
+										]
+											.filter(Boolean)
+											.join(", ")}
+									</div>
+									{address.phone && <div>{address.phone}</div>}
+									{address.email && <div>{address.email}</div>}
+								</Typography>
+							)}
 						</StyledSection>
 					</Grid>
 				</Grid>
@@ -78,15 +128,15 @@ export function Footer() {
 							data-testid="legal-links"
 							sx={{ width: { xs: "100%", sm: "auto" } }}
 						>
-							<ResponsiveNavlink href="/legal/imprint" data-testid="imprint-link">
-								{t("common:navigation.imprint")}
-							</ResponsiveNavlink>
-							<ResponsiveNavlink href="/legal/terms" data-testid="terms-link">
-								{t("common:navigation.terms")}
-							</ResponsiveNavlink>
-							<ResponsiveNavlink href="/legal/privacy" data-testid="privacy-link">
-								{t("common:navigation.privacy")}
-							</ResponsiveNavlink>
+							{navigation.legal.map(link => (
+								<ResponsiveNavlink
+									key={link.href}
+									href={link.href}
+									data-testid={`${link.href}-link`}
+								>
+									{link.label}
+								</ResponsiveNavlink>
+							))}
 						</StyledInlineNav>
 					</Grid>
 					<Grid xs={1} sx={{ display: "flex", justifyContent: "flex-end" }}>

@@ -58,7 +58,7 @@ export default function Page() {
 					</Stack>
 				</Grid>
 				<Grid xs={1}>
-					<LottiePlayer src="/lottie/come/data.json" />
+					<LottiePlayer src="/lottie/locked/data.json" />
 				</Grid>
 			</Grid>
 		</Layout>

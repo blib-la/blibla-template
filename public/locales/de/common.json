@@ -1,4 +1,5 @@
 {
+  "community": "Community",
   "company": "Firma",
   "contact": "Kontakt",
   "cookieBanner": {
@@ -6,9 +7,17 @@
     "acceptNecessary": "Notwendige akzeptieren",
     "cookieMessage": "Wir verwenden Cookies um das Erlebnis auf dieser App zu verbessern."
   },
+  "country": {
+    "de": "Deutschland",
+    "es": "Spanien",
+    "fr": "Frankreich",
+    "it": "Italien",
+    "us": "U.S.A."
+  },
   "navigation": {
     "about": "Über Uns",
     "admin": "Admin",
+    "blog": "Blog",
     "design": "Design System",
     "goHome": "Zur Startseite",
     "home": "Startseite",

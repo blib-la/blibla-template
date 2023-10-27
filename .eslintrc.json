@@ -73,12 +73,12 @@
       "noSortAlphabetically": true
     }]
   },
-
   "overrides": [
     {
-      "files": "next-i18next.config.js",
+      "files": ["sanity.cli.ts","next-i18next.config.js"],
       "rules": {
-        "unicorn/prefer-module": "off"
+        "unicorn/prefer-module": "off",
+        "unicorn/no-null": "off"
       }
     },
     {

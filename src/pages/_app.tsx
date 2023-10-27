@@ -10,11 +10,15 @@ import { appWithTranslation } from "next-i18next";
 import React from "react";
 import { SWRConfig } from "swr";
 
+import { DataProvider } from "@/ions/contexts/data";
+import type { Navigation } from "@/ions/contexts/navigation";
+import { NavigationProvider } from "@/ions/contexts/navigation";
 import { globalStyles } from "@/ions/styles";
 import { fetcher } from "@/ions/swr/fetcher";
 import { theme } from "@/ions/theme";
 import { CSS_VARIABLE_PREFIX } from "@/ions/theme/constants";
 import { PWAConfig } from "@/molecules/pwa-config";
+import type { AddressDocument } from "~/sanity/lib/queries";
 
 const CookieBanner = dynamic(
 	async () => import("@/organisms/cookie-banner").then(module_ => module_.CookieBanner),
@@ -25,8 +29,8 @@ const CookieBanner = dynamic(
 
 function App({
 	Component,
-	pageProps: { session, ...pageProperties },
-}: AppProps<{ session?: Session }>) {
+	pageProps: { session, navigation, address, ...pageProperties },
+}: AppProps<{ session?: Session; navigation: Navigation; address: AddressDocument }>) {
 	return (
 		<CssVarsProvider
 			theme={theme}
@@ -58,8 +62,12 @@ function App({
 							revalidateOnReconnect: false,
 						}}
 					>
-						<Component {...pageProperties} />
-						<CookieBanner />
+						<DataProvider value={{ address }}>
+							<NavigationProvider value={navigation}>
+								<Component {...pageProperties} />
+								<CookieBanner />
+							</NavigationProvider>
+						</DataProvider>
 					</SWRConfig>
 				</CookieConsentProvider>
 			</SessionProvider>

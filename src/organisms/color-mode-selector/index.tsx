@@ -1,4 +1,4 @@
-import Button from "@mui/joy/Button";
+import IconButton from "@mui/joy/IconButton";
 import ToggleButtonGroup from "@mui/joy/ToggleButtonGroup";
 import { useTranslation } from "next-i18next";
 
@@ -18,14 +18,14 @@ export function ColorModeSelector() {
 			}}
 		>
 			{Object.entries(icons).map(([key, icon]) => (
-				<Button
+				<IconButton
 					key={key}
 					value={key}
 					data-testid={`color-mode-${key}`}
 					aria-label={t(`button:colorMode.${key}`)}
 				>
 					{icon}
-				</Button>
+				</IconButton>
 			))}
 		</ToggleButtonGroup>
 	);

@@ -4,7 +4,7 @@ import mdx from "@next/mdx";
 import { globby } from "globby";
 import remarkGfm from "remark-gfm";
 
-import index18Next from "./next-i18next.config.js";
+import nextI18Next from "./next-i18next.config.js";
 
 const withMDX = mdx({
 	extension: /\.mdx?$/,
@@ -19,7 +19,7 @@ const withMDX = mdx({
 	},
 });
 
-const { i18n } = index18Next;
+const { i18n } = nextI18Next;
 
 const { defaultLocale, locales } = i18n;
 const extraLocales = locales.filter(locale => locale !== defaultLocale);
@@ -41,6 +41,10 @@ const nextConfig = {
 			{
 				protocol: "https",
 				hostname: "images.unsplash.com",
+			},
+			{
+				protocol: "https",
+				hostname: "cdn.sanity.io",
 			},
 		],
 		formats: ["image/webp"],
