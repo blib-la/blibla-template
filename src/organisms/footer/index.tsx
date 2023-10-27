@@ -44,7 +44,7 @@ export function Footer() {
 						</StyledSection>
 					</Grid>
 					<Grid xs={1}>
-						<StyledSection data-testid="company-section">
+						<StyledSection data-testid="community-section">
 							<Typography level="title-md" component="h2">
 								{t("common:community")}
 							</Typography>
@@ -132,7 +132,7 @@ export function Footer() {
 								<ResponsiveNavlink
 									key={link.href}
 									href={link.href}
-									data-testid="legal-link"
+									data-testid={`${link.href}-link`}
 								>
 									{link.label}
 								</ResponsiveNavlink>

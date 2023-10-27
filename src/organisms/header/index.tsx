@@ -43,7 +43,7 @@ export function Header(properties: SheetProps) {
 			>
 				<Logo />
 			</Link>
-			<Stack data-testid="login-form" direction="row" justifyContent="center">
+			<Stack direction="row" justifyContent="center">
 				<ColorModeSelector />
 			</Stack>
 			<div data-testid="login-form">
