@@ -1,4 +1,5 @@
 {
+  "community": "Community",
   "company": "Company",
   "contact": "Contact",
   "cookieBanner": {
@@ -6,9 +7,17 @@
     "acceptNecessary": "Accept necessary",
     "cookieMessage": "We use cookies to improve the experience of this app."
   },
+  "country": {
+    "de": "Germany",
+    "es": "Spain",
+    "fr": "France",
+    "it": "Italy",
+    "us": "U.S.A."
+  },
   "navigation": {
     "about": "About Us",
     "admin": "Admin",
+    "blog": "Blog",
     "design": "Design System",
     "goHome": "Take Me Home",
     "home": "Home",

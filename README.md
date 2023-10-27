@@ -1,8 +1,9 @@
 # Web App Template
 
 Welcome to an incredible full-stack web application template powered by
-[Next.js](https://nextjs.org/)! It is a full-fledged, ready-to-deploy foundation for your next big
-project.
+[Next.js](https://nextjs.org/)! This template is crafted to ease the deployment of GDPR-compliant
+projects endowed with a Content Management System (CMS), database, user management, and a
+customizable UI. It serves as a full-fledged, ready-to-deploy foundation for your next project.
 
 <!-- toc -->
 
@@ -21,7 +22,10 @@ project.
         -   [favicons Script](#favicons-script)
         -   [next-pwa Integration](#next-pwa-integration)
     -   [Prudent Routing Choice Ensures Stability](#prudent-routing-choice-ensures-stability)
+    -   [Embedded Sanity.io](#embedded-sanityio)
+        -   [Environment Configuration:](#environment-configuration)
 -   [NPM Scripts Explained](#npm-scripts-explained)
+-   [Feedback & Support](#feedback--support)
 
 <!-- tocstop -->
 
@@ -32,7 +36,7 @@ template to match your project requirements:
 
 1. **Environment Configuration:**
 
-    - Duplicate the `.env.local` file.
+    - Copy the `.env.local.example` file as `.env.local` file.
     - Fill in the necessary values within the newly copied file.
 
 2. **Docker Development Setup:**
@@ -68,6 +72,9 @@ aligned with your project's needs. Happy coding!
 
 ### Database Setup
 
+> ⚖️ GDPR Compliance: The combination of Prisma, Postgres, and Docker facilitates GDPR-compliant
+> data management practices by ensuring secure, structured, and well-documented data handling.
+
 -   **Prisma**: We utilize the robust [Prisma](https://www.prisma.io/) database with pre-configured
     scripts via `@prisma/client`. Prisma offers a strong Object-Relational Mapping (ORM) layer for
     easy data access and manipulation.
@@ -79,15 +86,21 @@ aligned with your project's needs. Happy coding!
     container that runs Postgres. This ensures that you don't need to install Postgres locally,
     making it easier to manage your development environment.
 
-> You can start the database container using the `docker:dev` script in your package.json.
+> ℹ️ You can start the database container using the `docker:dev` script in your package.json.
 
 ### Social Login and User Management
+
+> ⚖️ GDPR Readiness: The integration of Auth.js for social login and user preferences management is
+> designed in adherence to GDPR guidelines ensuring user data privacy and consent management.
 
 -   **Social Login**: Integrated with [Auth.js](https://authjs.dev/) (formerly known as
     [NextAuth](https://next-auth.js.org/)) for seamless social login options.
 -   **User Preferences**: Includes a GDPR-ready Cookie Banner for user privacy.
 
 ### UI Library
+
+> ⚖️ GDPR Compliance: Utilizing Joy UI enables the creation of user-friendly interfaces, ensuring
+> clear communication and consent collection in line with GDPR requirements.
 
 -   **Core UI**: Leverage the power of [Joy UI](https://mui.com/joy-ui/getting-started/), the
     next-gen UI library.
@@ -148,7 +161,7 @@ rewrites and redirects within the `next.config.mjs`, ensuring a seamless mapping
 **"my/page/index.mdx" to EN ("/my/page")** and **"my/page/de.mdx" to DE ("/de/my/page")**, with the
 flexibility to alter this default mapping as per project needs.
 
-> If your default language is German, you can change your "de.mdx" to "en.mdx".
+> ℹ️ If your default language is German, you can change your "de.mdx" to "en.mdx".
 >
 > -   **"my/page/index.mdx" to DE ("/my/page")**
 > -   **"my/page/en.mdx" to EN ("/en/my/page")**
@@ -253,10 +266,49 @@ product that emphasizes best practices and rigorous testing. This pragmatic appr
 adoption, enhances reliability, and ensures our readiness to seamlessly transition as the ecosystem
 matures.
 
+### Embedded Sanity.io
+
+We've adeptly integrated [Sanity.io](https://www.sanity.io/) within the template, ushering in a
+robust Content Management System (CMS) that comes preconfigured with schemas for essential pages,
+navigation entries, addresses, and a blog, serving as exemplary setups. This integration not only
+facilitates the enrichment of other static pages with dynamic content but also lays a solid
+foundation for further content management endeavors, thus significantly enhancing the overall
+content management experience.
+
+#### Environment Configuration:
+
+-   Duplicate the `.env.local` file.
+-   Populate the following new environment variables which are essential for Sanity integration:
+
+    -   `NEXT_PUBLIC_SANITY_PROJECT_ID="XXX"`
+    -   `NEXT_PUBLIC_SANITY_DATASET="production"`
+
+    You can find these values on your Sanity management dashboard at
+    [https://manage.sanity.io](https://manage.sanity.io).
+
+Sanity's CMS is strategically tucked behind two layers of login security to ensure an extra level of
+protection:
+
+1. **App Admin Login:**
+
+    - Initially, log in as an admin to the app. This level grants access to the studio login portal.
+
+2. **Studio Login (Sanity):**
+    - Proceed to log into the Sanity studio to access and manage your content.
+
+This dual login setup not only fortifies the security around your content management system but also
+provides a streamlined workflow for administrators and content managers alike.
+
+With Sanity.io embedded within, managing content, including GDPR-related legal pages, blogs, or
+other static pages, becomes a streamlined, secure, and efficient process. This integration aims at
+providing a flexible yet secure environment for all your content management needs, aligning with
+GDPR standards.
+
 ## NPM Scripts Explained
 
-This project includes a variety of NPM scripts to help with development, building, and testing.
-Here's a rundown:
+This section details a variety of NPM scripts included in the project to streamline development,
+building, and testing processes. These scripts simplify various tasks, ensuring a smooth workflow
+throughout the project lifecycle.
 
 -   **`build`:** Generates a production-ready build of your Next.js app.
 
@@ -289,3 +341,10 @@ Here's a rundown:
 
 -   **`vercel-build`:** Generates Prisma client, runs migrations, and builds the app. Meant for
     Vercel deployments.
+
+## Feedback & Support
+
+We value your input. Reach out to us through these channels:
+
+-   **Issue Tracker**: Encountered a bug? Report it on
+    [GitHub Issues](https://github.com/blib-la/blibla-template/issues).

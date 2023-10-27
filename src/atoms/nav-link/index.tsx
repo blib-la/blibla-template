@@ -9,14 +9,16 @@ export function NavLink({
 	children,
 	href,
 	color = "neutral",
+	locale: outerLocale,
 	disableHighlight,
 	...properties
-}: LinkProps & { disableHighlight?: boolean }) {
-	const { locales, asPath } = useRouter();
+}: LinkProps & { disableHighlight?: boolean; locale?: string }) {
+	const { locale, locales, asPath } = useRouter();
 	const rawAsPath = getRawAsPath(asPath, locales);
 	const isActive = rawAsPath === href;
+
 	return (
-		<NextLink legacyBehavior passHref href={href!}>
+		<NextLink legacyBehavior passHref locale={outerLocale ?? locale} href={href!}>
 			<JoyLink
 				color={color}
 				variant={isActive && !disableHighlight ? "soft" : undefined}
@@ -28,7 +30,11 @@ export function NavLink({
 	);
 }
 
-export function ResponsiveNavlink({ children, sx, ...properties }: LinkProps) {
+export function ResponsiveNavlink({
+	children,
+	sx,
+	...properties
+}: LinkProps & { locale?: string }) {
 	return (
 		<NavLink
 			disableHighlight

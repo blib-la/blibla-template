@@ -7,6 +7,10 @@ export default withAuth({
 				return token?.role === "ADMIN";
 			}
 
+			if (req.nextUrl.pathname.startsWith("/draft")) {
+				return token?.role === "ADMIN";
+			}
+
 			return Boolean(token);
 		},
 	},

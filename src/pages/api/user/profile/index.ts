@@ -7,6 +7,9 @@ const prisma = new PrismaClient();
 
 export default async function handler(request: NextApiRequest, response: NextApiResponse) {
 	const token = (await getToken({ req: request })) as JWT;
+	if (!token?.sub) {
+		return response.status(401).end();
+	}
 
 	const { method, body } = request;
 

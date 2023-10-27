@@ -18,7 +18,11 @@ const LottiePlayer = dynamic(
 export default function Page() {
 	const { t } = useTranslation(["common", "404"]);
 	return (
-		<Layout sx={{ justifyContent: "center" }}>
+		<Layout
+			sx={{
+				justifyContent: "center",
+			}}
+		>
 			<Grid container spacing={2} columns={{ xs: 1, md: 2 }}>
 				<Grid
 					xs={1}
