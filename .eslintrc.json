@@ -66,6 +66,15 @@
     ],
     "func-style": ["error", "declaration"],
     "prefer-arrow-callback": "error",
+    "unicorn/filename-case": [
+      "error",
+      {
+        "case": "kebabCase",
+        "ignore": [
+          "^\\[.*\\]\\.tsx?$"
+        ]
+      }
+    ],
     "react/jsx-sort-props": ["error", {
       "callbacksLast":true,
       "shorthandFirst": true,
