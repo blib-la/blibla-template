@@ -21,7 +21,7 @@ export default defineType({
 				"Select the type of content to promote. Currently, only 'post' is supported.",
 			validation: Rule => Rule.required().error("The content type must be specified."),
 			options: {
-				list: ["post", "workflow"],
+				list: ["post"],
 				layout: "radio",
 			},
 		}),
