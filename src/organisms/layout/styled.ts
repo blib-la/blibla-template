@@ -8,5 +8,5 @@ export const StyledContainer = styled(Container)(({ theme }) => ({
 	flexDirection: "column",
 	paddingTop: theme.spacing(4),
 	paddingBottom: theme.spacing(4),
-	minHeight: `calc(100dvh - ${HEADER_HEIGHT}px - var(--stageHeight, 0))`,
+	minHeight: `calc(100dvh - ${HEADER_HEIGHT}px - var(--stageHeight, 0px))`,
 }));
