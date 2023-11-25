@@ -23,8 +23,9 @@ export function CookieBanner() {
 		!consent.necessary && (
 			<StyledBanner data-testid="cookie-banner">
 				<Alert
+					invertedColors
 					color="neutral"
-					variant="plain"
+					variant="soft"
 					startDecorator={<CookieIcon />}
 					sx={{ alignItems: "flex-start", boxShadow: "md" }}
 				>
@@ -82,19 +83,20 @@ export function CookieSettings() {
 				{t("common:cookieBanner.configureCookies")}
 			</Button>
 			<Modal open={dialogOpen} onClose={handleClose}>
-				<ModalDialog>
+				<ModalDialog invertedColors color="neutral" variant="soft">
 					<Typography>{t("common:cookieBanner.manageCookies")}</Typography>
 					<Stack gap={2} sx={{ maxWidth: 400, px: 2, pb: 1 }}>
 						<Box>
 							<Switch
+								disabled
 								checked={consent.necessary}
-								startDecorator={t("common:cookieBanner.necessary")}
+								endDecorator={t("common:cookieBanner.necessary")}
 							/>
 						</Box>
 						<Box>
 							<Switch
 								checked={consent.session}
-								startDecorator={t("common:cookieBanner.session")}
+								endDecorator={t("common:cookieBanner.session")}
 								onChange={event => {
 									acceptCookies({
 										...consent,
@@ -106,7 +108,7 @@ export function CookieSettings() {
 						<Box>
 							<Switch
 								checked={consent.firstParty}
-								startDecorator={t("common:cookieBanner.firstParty")}
+								endDecorator={t("common:cookieBanner.firstParty")}
 								onChange={event => {
 									acceptCookies({
 										...consent,
@@ -118,7 +120,7 @@ export function CookieSettings() {
 						<Box>
 							<Switch
 								checked={consent.thirdParty}
-								startDecorator={t("common:cookieBanner.thirdParty")}
+								endDecorator={t("common:cookieBanner.thirdParty")}
 								onChange={event => {
 									acceptCookies({
 										...consent,
@@ -131,7 +133,7 @@ export function CookieSettings() {
 						<Box>
 							<Switch
 								checked={consent.marketing}
-								startDecorator={t("common:cookieBanner.marketing")}
+								endDecorator={t("common:cookieBanner.marketing")}
 								onChange={event => {
 									acceptCookies({
 										...consent,
@@ -143,7 +145,7 @@ export function CookieSettings() {
 						<Box>
 							<Switch
 								checked={consent.preferences}
-								startDecorator={t("common:cookieBanner.preferences")}
+								endDecorator={t("common:cookieBanner.preferences")}
 								onChange={event => {
 									acceptCookies({
 										...consent,
@@ -155,7 +157,7 @@ export function CookieSettings() {
 						<Box>
 							<Switch
 								checked={consent.statistics}
-								startDecorator={t("common:cookieBanner.statistics")}
+								endDecorator={t("common:cookieBanner.statistics")}
 								onChange={event => {
 									acceptCookies({
 										...consent,
@@ -167,7 +169,6 @@ export function CookieSettings() {
 					</Stack>
 					<DialogActions>
 						<Button
-							color="primary"
 							onClick={() => {
 								acceptAllCookies();
 								handleClose();
@@ -176,7 +177,7 @@ export function CookieSettings() {
 							{t("common:cookieBanner.acceptAll")}
 						</Button>
 						<Button
-							color="neutral"
+							variant="plain"
 							onClick={() => {
 								declineAllCookies();
 								handleClose();
@@ -184,7 +185,7 @@ export function CookieSettings() {
 						>
 							{t("common:cookieBanner.acceptNecessary")}
 						</Button>
-						<Button color="neutral" onClick={handleClose}>
+						<Button color="neutral" variant="plain" onClick={handleClose}>
 							{t("button:close")}
 						</Button>
 					</DialogActions>

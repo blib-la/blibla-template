@@ -11,8 +11,9 @@ export function ColorModeSelector() {
 	return (
 		<ToggleButtonGroup
 			value={mode}
-			variant="plain"
+			variant="soft"
 			color="neutral"
+			sx={{ flex: 1 }}
 			onChange={(event, newValue) => {
 				setMode(newValue ?? "system");
 			}}
@@ -23,6 +24,7 @@ export function ColorModeSelector() {
 					value={key}
 					data-testid={`color-mode-${key}`}
 					aria-label={t(`button:colorMode.${key}`)}
+					sx={{ flex: 1 }}
 				>
 					{icon}
 				</IconButton>

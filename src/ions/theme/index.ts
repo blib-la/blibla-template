@@ -144,6 +144,7 @@ export const theme = extendTheme({
 				root: { width: "100%", borderRadius: 0 },
 			},
 		},
+
 		JoyLink: {
 			styleOverrides: {
 				root: {
@@ -188,6 +189,14 @@ export const theme = extendTheme({
 						},
 					},
 				},
+			},
+		},
+		JoyModalDialog: {
+			defaultProps: {
+				variant: "plain",
+			},
+			styleOverrides: {
+				root: { borderRadius: 4 },
 			},
 		},
 		JoySelect: {
