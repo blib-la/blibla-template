@@ -4,14 +4,16 @@ import type { Profile } from "@prisma/client";
 import type { GetStaticPropsContext } from "next";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
+import { useTranslation } from "next-i18next";
 import useSWR from "swr";
 
 import { getStaticProperties } from "@/ions/ssr/get-properties";
 import { BioCard } from "@/organisms/bio-card";
-import { Layout } from "@/templates/layout";
+import { Layout } from "@/organisms/layout";
 
 export default function Page() {
 	const { replace } = useRouter();
+	const { t } = useTranslation(["common"]);
 	const { data: session, status } = useSession({
 		required: true,
 		async onUnauthenticated() {
@@ -22,7 +24,7 @@ export default function Page() {
 
 	return (
 		session && (
-			<Layout>
+			<Layout seo={{ noIndex: true, title: t("common:navigation.profile") }}>
 				{error && <Alert color="danger">{error.message}</Alert>}
 				<Grid container columns={{ xs: 1, sm: 2, lg: 3 }} spacing={2}>
 					<Grid xs={1}>

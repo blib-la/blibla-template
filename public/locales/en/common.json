@@ -5,7 +5,16 @@
   "cookieBanner": {
     "acceptAll": "Accept all",
     "acceptNecessary": "Accept necessary",
-    "cookieMessage": "We use cookies to improve the experience of this app."
+    "configureCookies": "Cookie Settings",
+    "cookieMessage": "We use cookies to improve the experience of this app.",
+    "firstParty": "First party",
+    "manageCookies": "Manage cookies",
+    "marketing": "Marketing",
+    "necessary": "Necessary",
+    "preferences": "Preferences",
+    "session": "Session",
+    "statistics": "Statistics",
+    "thirdParty": "Third party"
   },
   "country": {
     "de": "Germany",

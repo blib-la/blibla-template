@@ -1,4 +1,3 @@
-import Box from "@mui/joy/Box";
 import Button from "@mui/joy/Button";
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
@@ -10,9 +9,11 @@ import Radio from "@mui/joy/Radio";
 import Sheet from "@mui/joy/Sheet";
 import Slider from "@mui/joy/Slider";
 import type { ColorPaletteProp, VariantProp } from "@mui/joy/styles";
+import { styled } from "@mui/joy/styles";
 import type { TypographySystem } from "@mui/joy/styles/types";
 import Switch from "@mui/joy/Switch";
 import Typography from "@mui/joy/Typography";
+import humanizeString from "humanize-string";
 import type { GetStaticPropsContext } from "next";
 import { upperCaseFirst } from "upper-case-first";
 
@@ -20,8 +21,7 @@ import { getStaticProperties } from "@/ions/ssr/get-properties";
 import type { ColorShades, Palette } from "@/ions/theme/palette";
 import { palette } from "@/ions/theme/palette";
 import { getContrastColor } from "@/ions/utils/color";
-import { capitalizeFirstLetter } from "@/ions/utils/string";
-import { Layout } from "@/templates/layout";
+import { Layout } from "@/organisms/layout";
 
 /**
  * This file encompasses various local functions and other declarations, primarily serving demonstrative purposes.
@@ -59,14 +59,14 @@ export const typeLevels: (keyof TypographySystem)[] = [
 	"body-xs",
 ];
 
-export function PaletteDisplay({ palette }: PaletteProperties) {
+export function PaletteDisplay({ palette: palette_ }: PaletteProperties) {
 	return (
 		<Grid container spacing={2} columns={{ xs: 1, sm: 2, md: 4, lg: 5 }} sx={{ my: 4 }}>
-			{Object.keys(palette).map(colorName => (
+			{Object.keys(palette_).map(colorName => (
 				<Grid key={colorName} xs={1}>
 					<Card
 						variant="solid"
-						sx={{ bgcolor: palette[colorName as keyof Palette]["500"] }}
+						sx={{ bgcolor: palette_[colorName as keyof Palette]["500"] }}
 					>
 						<Typography
 							level="title-lg"
@@ -75,9 +75,11 @@ export function PaletteDisplay({ palette }: PaletteProperties) {
 							{upperCaseFirst(colorName)}
 						</Typography>
 						<CardContent sx={{ gap: 0 }}>
-							{Object.keys(palette[colorName as keyof Palette]).map(shade => {
+							{Object.keys(palette_[colorName as keyof Palette]).map(shade => {
 								const color =
-									palette[colorName as keyof Palette][shade as keyof ColorShades];
+									palette_[colorName as keyof Palette][
+										shade as keyof ColorShades
+									];
 								const textColor = getContrastColor(color);
 
 								return (
@@ -106,43 +108,61 @@ export function PaletteDisplay({ palette }: PaletteProperties) {
 	);
 }
 
+const StyledBox = styled("div")(({ theme }) => ({
+	display: "flex",
+	alignItems: "center",
+	gap: theme.spacing(2),
+	padding: theme.spacing(1),
+	marginTop: theme.spacing(4),
+	marginBottom: theme.spacing(4),
+	flexWrap: "wrap",
+}));
 export default function Page() {
 	return (
-		<Layout
-			title="Next.js PWA Template - Design System and Coperate Identity"
-			description="Our design system embodies your Corporate Identity (CI), ensuring a coherent brand presentation while optimizing performance for an enhanced user experience."
-		>
+		<Layout seo={{ noIndex: true, title: "Design System" }}>
 			{typeLevels.map(typeLevel => (
 				<Typography key={typeLevel} level={typeLevel} component="div">
 					Typography Level: {typeLevel}
 				</Typography>
 			))}
-			<Grid container spacing={1} columns={{ xs: 1, md: 2 }} sx={{ my: 4 }}>
+			<Grid container spacing={2} columns={{ xs: 1, md: 2 }} sx={{ my: 4 }}>
 				<Grid xs={1}>
 					<Typography level="h2" mb={2}>
-						AI Revolutionizes Traditional Design Landscape
+						Harmonized Color for Enhanced User Experience
 					</Typography>
 					<Typography>
-						Artificial intelligence is significantly impacting design, introducing
-						automated tools that enhance creativity. AI’s data analysis capabilities
-						inform better design decisions, making insights from user interactions
-						easily accessible. Furthermore, AI expedites iterative processes, allowing
-						designers more time for innovative thinking. This synergy of AI and design
-						is forging a trail towards more intuitive, user-centered design solutions.
+						At the heart of our public design system lies a commitment to crafting
+						exceptional user experiences, and our latest initiative embodies this ethos
+						- a meticulously curated, homogeneous color palette. This isn&apos;t merely
+						an aesthetic upgrade; it&apos;s a strategic enhancement to our user
+						interfaces, making them more intuitive and robust. Our comprehensive range
+						of 500-shade colors isn’t just pleasing to the eye; it&apos;s AA compliant
+						against both black and white, ensuring that accessibility is not an
+						afterthought but a core consideration. By optimizing these shades to pair
+						flawlessly with white text, we enhance text visibility, creating a more
+						user-friendly interface. This unified approach does not only add visual
+						appeal but also fosters better user understanding, setting the stage for a
+						seamless and engaging user journey through our digital landscape.
 					</Typography>
 				</Grid>
 				<Grid xs={1}>
 					<Typography level="h2" mb={2}>
-						AI Drives Innovation in Web Development
+						Intuitive Design with Strategic Color Integration
 					</Typography>
 					<Typography>
-						Artificial Intelligence is transforming web development by automating
-						routine tasks, thus allowing developers to focus on more complex issues.
-						AI-powered tools offer personalized web experiences, enhancing user
-						engagement. Moreover, AI&apos;s predictive analysis helps in anticipating
-						user behavior, ensuring a more intuitive user interface. The infusion of AI
-						in web development is fostering a new era of smart, user-centric, and
-						dynamic web solutions.
+						Embracing a palette that works as hard as our designers and developers do,
+						we&apos;re integrating strategy with aesthetics. Our palette has been
+						crafted with component compatibility in mind, ensuring that colors
+						seamlessly fit across all design elements. The intuitive gradients and broad
+						hue range, including 9 distinct hues and a neutral grey, offer our designers
+						the diversity needed to make bold and innovative design choices without
+						compromising on inter-hue harmony. This thoughtful curation guarantees that
+						our UI remains harmonious, regardless of the complexity or simplicity of the
+						design. Moreover, the wide compatibility of our color system means that it
+						blends effortlessly with various UI elements and layouts, embodying a fusion
+						of design intuition with top-tier development practices. By leveraging this
+						strategic color integration, we&apos;re dedicated to delivering a cohesive,
+						user-centric product that stands out in the digital realm.
 					</Typography>
 				</Grid>
 			</Grid>
@@ -150,177 +170,98 @@ export default function Page() {
 			<PaletteDisplay palette={palette} />
 			<Typography level="h2">Button</Typography>
 			{variants.map(variant => (
-				<Box
-					key={variant}
-					sx={{
-						display: "flex",
-						alignItems: "center",
-						gap: 2,
-						p: 1,
-						my: 4,
-						flexWrap: "wrap",
-					}}
-				>
+				<StyledBox key={variant}>
 					{colors.map(color => (
 						<Button key={color} variant={variant} color={color}>
-							{capitalizeFirstLetter(color)}
+							{humanizeString(color)}
 						</Button>
 					))}
-				</Box>
+				</StyledBox>
 			))}
 			<Typography level="h2">Chip</Typography>
 			{variants.map(variant => (
-				<Box
-					key={variant}
-					sx={{
-						display: "flex",
-						alignItems: "center",
-						gap: 2,
-						p: 1,
-						my: 4,
-						flexWrap: "wrap",
-					}}
-				>
+				<StyledBox key={variant}>
 					{colors.map(color => (
 						<Chip key={color} variant={variant} color={color}>
-							{capitalizeFirstLetter(color)}
+							{humanizeString(color)}
 						</Chip>
 					))}
-				</Box>
+				</StyledBox>
 			))}
 			<Typography level="h2">Checkbox</Typography>
 			{variants.map(variant => (
-				<Box
-					key={variant}
-					sx={{
-						display: "flex",
-						alignItems: "center",
-						gap: 2,
-						p: 1,
-						my: 4,
-						flexWrap: "wrap",
-					}}
-				>
+				<StyledBox key={variant}>
 					{colors.map(color => (
 						<Checkbox
 							key={color}
-							label={capitalizeFirstLetter(color)}
+							label={humanizeString(color)}
 							variant={variant}
 							color={color}
 						/>
 					))}
-				</Box>
+				</StyledBox>
 			))}
 			<Typography level="h2">Radio</Typography>
 			{variants.map(variant => (
-				<Box
-					key={variant}
-					sx={{
-						display: "flex",
-						alignItems: "center",
-						gap: 2,
-						p: 1,
-						my: 4,
-						flexWrap: "wrap",
-					}}
-				>
+				<StyledBox key={variant}>
 					{colors.map(color => (
 						<Radio
 							key={color}
 							name={variant}
-							label={capitalizeFirstLetter(color)}
+							label={humanizeString(color)}
 							variant={variant}
 							color={color}
 						/>
 					))}
-				</Box>
+				</StyledBox>
 			))}
 			<Typography level="h2">Switch</Typography>
 			{variants.map(variant => (
-				<Box
-					key={variant}
-					sx={{
-						display: "flex",
-						alignItems: "center",
-						gap: 2,
-						p: 1,
-						my: 4,
-						flexWrap: "wrap",
-					}}
-				>
+				<StyledBox key={variant}>
 					{colors.map(color => (
 						<Switch
 							key={color}
 							component="label"
-							aria-label={capitalizeFirstLetter(color)}
-							endDecorator={capitalizeFirstLetter(color)}
+							aria-label={humanizeString(color)}
+							endDecorator={humanizeString(color)}
 							variant={variant}
 							color={color}
 						/>
 					))}
-				</Box>
+				</StyledBox>
 			))}
 			<Typography level="h2">Slider</Typography>
 			{variants.map(variant => (
-				<Box
-					key={variant}
-					sx={{
-						display: "flex",
-						alignItems: "center",
-						gap: 2,
-						p: 1,
-						my: 4,
-						flexWrap: "wrap",
-					}}
-				>
+				<StyledBox key={variant}>
 					{colors.map(color => (
 						<Slider
 							key={color}
-							aria-label={capitalizeFirstLetter(color)}
+							aria-label={humanizeString(color)}
 							variant={variant}
 							color={color}
 							sx={{ flex: 1 }}
 						/>
 					))}
-				</Box>
+				</StyledBox>
 			))}
 			<Typography level="h2">Input</Typography>
 			{variants.map(variant => (
-				<Box
-					key={variant}
-					sx={{
-						display: "flex",
-						alignItems: "center",
-						gap: 2,
-						p: 1,
-						my: 4,
-						flexWrap: "wrap",
-					}}
-				>
+				<StyledBox key={variant}>
 					{colors.map(color => (
 						<Input
 							key={color}
 							defaultValue={color}
-							aria-label={capitalizeFirstLetter(color)}
+							aria-label={humanizeString(color)}
 							variant={variant}
 							color={color}
 							sx={{ flex: 1 }}
 						/>
 					))}
-				</Box>
+				</StyledBox>
 			))}
 			<Typography level="h2">Sheet</Typography>
 			{variants.map(variant => (
-				<Box
-					key={variant}
-					sx={{
-						display: "flex",
-						alignItems: "center",
-						gap: 2,
-						my: 4,
-						flexWrap: "wrap",
-					}}
-				>
+				<StyledBox key={variant}>
 					{colors.map(color => (
 						<Sheet
 							key={color}
@@ -335,10 +276,10 @@ export default function Page() {
 								flexWrap: "wrap",
 							}}
 						>
-							{capitalizeFirstLetter(color)}
+							{humanizeString(color)}
 						</Sheet>
 					))}
-				</Box>
+				</StyledBox>
 			))}
 		</Layout>
 	);

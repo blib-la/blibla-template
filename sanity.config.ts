@@ -2,7 +2,6 @@
  * This config is used to set up Sanity Studio that's mounted on the `/pages/admin/[[...index]].tsx` route
  */
 
-import { documentInternationalization } from "@sanity/document-internationalization";
 import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
 import { deskTool } from "sanity/desk";
@@ -41,12 +40,7 @@ export default defineConfig({
 			languages,
 			// See: https://github.com/sanity-io/sanity-plugin-internationalized-array/issues/47
 			// defaultLanguages: [index18Next.i18n.defaultLocale],
-			fieldTypes: ["string", "seo", "blockContent"],
-		}),
-		documentInternationalization({
-			// Required configuration
-			supportedLanguages: languages,
-			schemaTypes: ["post"],
+			fieldTypes: ["string", "text", "seo", "blockContent"],
 		}),
 	],
 });

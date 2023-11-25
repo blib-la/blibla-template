@@ -10,7 +10,7 @@ import { signOut } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 
 import { getStaticProperties } from "@/ions/ssr/get-properties";
-import { Layout } from "@/templates/layout";
+import { Layout } from "@/organisms/layout";
 
 const LottiePlayer = dynamic(
 	() => import("@/atoms/lottie-player").then(module_ => module_.LottiePlayer),
@@ -22,7 +22,10 @@ export default function Page() {
 	const { t } = useTranslation(["button"]);
 
 	return (
-		<Layout sx={{ justifyContent: "center" }}>
+		<Layout
+			seo={{ noIndex: true, title: t("auth:titles.signOut") }}
+			sx={{ justifyContent: "center" }}
+		>
 			<Grid container data-testid="auth-sign-out" spacing={2} columns={{ xs: 1, md: 2 }}>
 				<Grid
 					xs={1}
@@ -39,6 +42,8 @@ export default function Page() {
 					<Typography level="h1">{t("auth:goodBye")}</Typography>
 					<Stack direction="row" spacing={1}>
 						<Button
+							variant="plain"
+							color="neutral"
 							startDecorator={<ArrowBackIcon />}
 							onClick={async () => {
 								back();

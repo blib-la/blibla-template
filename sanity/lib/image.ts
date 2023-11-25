@@ -16,3 +16,10 @@ export function urlForImage(source: Image) {
 
 	return imageBuilder.image(source).auto("format");
 }
+
+export function getImageSize(id: string) {
+	const dimensions = /^image-([\da-f]+)-(\d+x\d+)-(\w+)$/.exec(id)![2];
+	const [width, height] = dimensions.split("x").map(parts => Number.parseInt(parts, 10));
+
+	return { width, height };
+}

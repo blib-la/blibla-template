@@ -90,6 +90,10 @@ export const components: PortableTextComponents = {
 	},
 };
 
-export function RichText({ value, ...properties }: PortableTextProps) {
-	return <PortableText value={value} components={components} {...properties} />;
+export function RichTextBlock({ value, ...properties }: PortableTextProps) {
+	return (
+		<div>
+			<PortableText value={value} components={components} {...properties} />
+		</div>
+	);
 }
