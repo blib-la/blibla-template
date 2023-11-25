@@ -2,7 +2,20 @@ import path from "node:path";
 
 import mdx from "@next/mdx";
 import { globby } from "globby";
+import nextPWA from "next-pwa";
+import runtimeCaching from "next-pwa/cache.js";
+import transpileModules from "next-transpile-modules";
 import remarkGfm from "remark-gfm";
+
+const withTM = transpileModules(["@mui/joy"]); // Pass the modules you would like to see transpiled
+const withPWA = nextPWA({
+	disable: process.env.NODE_ENV === "development",
+	dest: "public",
+	register: true,
+	skipWaiting: true,
+	runtimeCaching,
+	buildExcludes: [/middleware-manifest.json$/],
+});
 
 import nextI18Next from "./next-i18next.config.js";
 
@@ -31,6 +44,10 @@ const routes = mdxFiles.map(filePath => {
 	return path.dirname(relativePath);
 });
 
+/**
+ *
+ * @type {import('next').NextConfig} config
+ */
 const nextConfig = {
 	i18n,
 	reactStrictMode: true,
@@ -84,4 +101,19 @@ const nextConfig = {
 		return redirects;
 	},
 };
-export default withMDX(nextConfig);
+/**
+ *
+ * @param plugins
+ * @param {import('next').NextConfig} nextConfig
+ * @returns {import('next').NextConfigObject}
+ */
+function withPlugins(plugins, nextConfig) {
+	let config = nextConfig;
+	for (const plugin of plugins) {
+		config = plugin(config);
+	}
+
+	return config;
+}
+
+export default withPlugins([withPWA, withTM, withMDX], nextConfig);

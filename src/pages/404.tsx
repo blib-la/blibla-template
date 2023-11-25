@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useTranslation } from "next-i18next";
 
 import { getStaticProperties } from "@/ions/ssr/get-properties";
-import { Layout } from "@/templates/layout";
+import { Layout } from "@/organisms/layout";
 
 const LottiePlayer = dynamic(
 	() => import("@/atoms/lottie-player").then(module_ => module_.LottiePlayer),
@@ -19,6 +19,7 @@ export default function Page() {
 	const { t } = useTranslation(["common", "404"]);
 	return (
 		<Layout
+			seo={{ noIndex: true, title: t("404:headline") }}
 			sx={{
 				justifyContent: "center",
 			}}

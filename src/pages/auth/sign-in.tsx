@@ -6,8 +6,8 @@ import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 
 import { getStaticProperties } from "@/ions/ssr/get-properties";
+import { Layout } from "@/organisms/layout";
 import { SocialLogin } from "@/organisms/social-login";
-import { Layout } from "@/templates/layout";
 
 const LottiePlayer = dynamic(
 	() => import("@/atoms/lottie-player").then(module_ => module_.LottiePlayer),
@@ -18,7 +18,10 @@ export default function Page() {
 	const { t } = useTranslation(["auth", "button"]);
 	const { query } = useRouter();
 	return (
-		<Layout sx={{ justifyContent: "center" }}>
+		<Layout
+			seo={{ noIndex: true, title: t("auth:titles.signIn") }}
+			sx={{ justifyContent: "center" }}
+		>
 			<Grid container data-testid="auth-sign-in" spacing={2} columns={{ xs: 1, md: 2 }}>
 				<Grid
 					xs={1}

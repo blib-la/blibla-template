@@ -46,3 +46,5 @@ next-env.d.ts
 # PWA files
 public/pwa
 src/molecules/pwa-config
+public/workbox-*.js*
+public/sw.js*

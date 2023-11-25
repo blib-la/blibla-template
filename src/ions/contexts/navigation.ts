@@ -3,6 +3,7 @@ import { createContext, useContext } from "react";
 export interface NavigationItem {
 	href: string;
 	label: string;
+	children: NavigationItem[] | null;
 }
 
 export interface Navigation {
@@ -10,8 +11,10 @@ export interface Navigation {
 }
 
 export const NavigationContext = createContext<Navigation>({
+	header: [],
 	legal: [],
 	company: [],
+	community: [],
 });
 
 export const { Provider: NavigationProvider } = NavigationContext;

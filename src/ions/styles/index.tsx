@@ -10,6 +10,7 @@ export const globalStyles = (
 				"--safe-area-inset-left": "env(safe-area-inset-left)",
 				"--safe-area-inset-right": "env(safe-area-inset-right)",
 			},
+			body: { overflowX: "hidden" },
 			"#__next": { display: "contents" },
 		})}
 	/>

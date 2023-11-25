@@ -1,23 +1,25 @@
 import { extendTheme } from "@mui/joy/styles";
 
-import { body, display } from "@/ions/fonts";
+import { body, code, display } from "@/ions/fonts";
 import { CSS_VARIABLE_PREFIX } from "@/ions/theme/constants";
 import { palette } from "@/ions/theme/palette";
 import { getCssVariable } from "@/ions/theme/utils";
 import { hexToRGB } from "@/ions/utils/color";
 
+const primaryColor = palette.teal;
+const secondaryColor = palette.pink;
 export const theme = extendTheme({
 	cssVarPrefix: CSS_VARIABLE_PREFIX,
 	colorSchemes: {
 		light: {
 			palette: {
 				primary: {
-					...palette.teal,
+					...primaryColor,
 					plainColor: getCssVariable("palette-primary-600"),
 					outlinedColor: getCssVariable("palette-primary-600"),
 				},
 				secondary: {
-					...palette.pink,
+					...secondaryColor,
 					plainColor: getCssVariable("palette-secondary-600"),
 					plainHoverBg: getCssVariable("palette-secondary-100"),
 					plainActiveBg: getCssVariable("palette-secondary-200"),
@@ -41,41 +43,45 @@ export const theme = extendTheme({
 					solidActiveBg: getCssVariable("palette-secondary-700"),
 					solidDisabledColor: getCssVariable("palette-neutral-400"),
 					solidDisabledBg: getCssVariable("palette-neutral-100"),
-					mainChannel: hexToRGB(palette.pink["500"]).join(" "),
-					lightChannel: hexToRGB(palette.pink["200"]).join(" "),
-					darkChannel: hexToRGB(palette.pink["700"]).join(" "),
+					mainChannel: hexToRGB(secondaryColor["500"]).join(" "),
+					lightChannel: hexToRGB(secondaryColor["100"]).join(" "),
+					darkChannel: hexToRGB(secondaryColor["800"]).join(" "),
 				},
 				neutral: {
 					...palette.grey,
-					plainColor: getCssVariable("palette-neutral-600"),
-					outlinedColor: getCssVariable("palette-neutral-600"),
+					plainColor: getCssVariable("palette-neutral-800"),
+					outlinedColor: getCssVariable("palette-neutral-800"),
 				},
 				danger: {
 					...palette.red,
-					plainColor: getCssVariable("palette-danger-600"),
-					outlinedColor: getCssVariable("palette-danger-600"),
+					plainColor: getCssVariable("palette-danger-800"),
+					outlinedColor: getCssVariable("palette-danger-800"),
 				},
 				success: {
 					...palette.green,
-					plainColor: getCssVariable("palette-success-600"),
-					outlinedColor: getCssVariable("palette-success-600"),
+					plainColor: getCssVariable("palette-success-800"),
+					outlinedColor: getCssVariable("palette-success-800"),
 				},
 				warning: {
 					...palette.yellow,
-					plainColor: getCssVariable("palette-warning-600"),
-					outlinedColor: getCssVariable("palette-warning-600"),
+					plainColor: getCssVariable("palette-warning-800"),
+					outlinedColor: getCssVariable("palette-warning-800"),
+				},
+				text: {
+					secondary: getCssVariable("palette-neutral-800"),
+					tertiary: getCssVariable("palette-neutral-700"),
 				},
 			},
 		},
 		dark: {
 			palette: {
 				primary: {
-					...palette.teal,
+					...primaryColor,
 					plainColor: getCssVariable("palette-primary-300"),
 					outlinedColor: getCssVariable("palette-primary-300"),
 				},
 				secondary: {
-					...palette.pink,
+					...secondaryColor,
 					plainColor: getCssVariable("palette-secondary-300"),
 					plainHoverBg: getCssVariable("palette-secondary-800"),
 					plainActiveBg: getCssVariable("palette-secondary-700"),
@@ -98,76 +104,115 @@ export const theme = extendTheme({
 					solidHoverBg: getCssVariable("palette-secondary-600"),
 					solidDisabledColor: getCssVariable("palette-neutral-500, #636B74"),
 					solidDisabledBg: getCssVariable("palette-neutral-800, #171A1C"),
-					mainChannel: hexToRGB(palette.pink["400"]).join(" "),
-					lightChannel: hexToRGB(palette.pink["200"]).join(" "),
-					darkChannel: hexToRGB(palette.pink["700"]).join(" "),
+					mainChannel: hexToRGB(secondaryColor["400"]).join(" "),
+					lightChannel: hexToRGB(secondaryColor["100"]).join(" "),
+					darkChannel: hexToRGB(secondaryColor["800"]).join(" "),
 				},
 				neutral: {
 					...palette.grey,
-					plainColor: getCssVariable("palette-neutral-300"),
-					outlinedColor: getCssVariable("palette-neutral-300"),
+					plainColor: getCssVariable("palette-neutral-100"),
+					outlinedColor: getCssVariable("palette-neutral-100"),
 				},
 				danger: {
 					...palette.red,
-					plainColor: getCssVariable("palette-danger-300"),
-					outlinedColor: getCssVariable("palette-danger-300"),
+					plainColor: getCssVariable("palette-danger-100"),
+					outlinedColor: getCssVariable("palette-danger-100"),
 				},
 				success: {
 					...palette.green,
-					plainColor: getCssVariable("palette-success-300"),
-					outlinedColor: getCssVariable("palette-success-300"),
+					plainColor: getCssVariable("palette-success-100"),
+					outlinedColor: getCssVariable("palette-success-100"),
 				},
 				warning: {
 					...palette.yellow,
-					plainColor: getCssVariable("palette-warning-300"),
-					outlinedColor: getCssVariable("palette-warning-300"),
+					plainColor: getCssVariable("palette-warning-100"),
+					outlinedColor: getCssVariable("palette-warning-100"),
+				},
+				text: {
+					secondary: getCssVariable("palette-neutral-100"),
+					tertiary: getCssVariable("palette-neutral-200"),
 				},
 			},
 		},
 	},
 	components: {
+		JoyCard: {
+			defaultProps: {
+				variant: "plain",
+			},
+			styleOverrides: {
+				root: { width: "100%", borderRadius: 0 },
+			},
+		},
 		JoyLink: {
 			styleOverrides: {
 				root: {
 					"[data-joy-color-scheme=light] &": {
 						"&.MuiLink-colorNeutral": {
-							color: getCssVariable("palette-neutral-600"),
+							color: getCssVariable("palette-neutral-700"),
 						},
 						"&.MuiLink-colorPrimary": {
-							color: getCssVariable("palette-primary-600"),
+							color: getCssVariable("palette-primary-700"),
 						},
 						"&.MuiLink-colorSecondary": {
-							color: getCssVariable("palette-secondary-600"),
+							color: getCssVariable("palette-secondary-700"),
 						},
 						"&.MuiLink-colorDanger": {
-							color: getCssVariable("palette-danger-600"),
+							color: getCssVariable("palette-danger-700"),
 						},
 						"&.MuiLink-colorSuccess": {
-							color: getCssVariable("palette-success-600"),
+							color: getCssVariable("palette-success-700"),
 						},
 						"&.MuiLink-colorWarning": {
-							color: getCssVariable("palette-warning-600"),
+							color: getCssVariable("palette-warning-700"),
 						},
 					},
 					"[data-joy-color-scheme=dark] &": {
 						"&.MuiLink-colorNeutral": {
-							color: getCssVariable("palette-neutral-300"),
+							color: getCssVariable("palette-neutral-200"),
 						},
 						"&.MuiLink-colorPrimary": {
-							color: getCssVariable("palette-primary-300"),
+							color: getCssVariable("palette-primary-200"),
 						},
 						"&.MuiLink-colorSecondary": {
-							color: getCssVariable("palette-secondary-300"),
+							color: getCssVariable("palette-secondary-200"),
 						},
 						"&.MuiLink-colorDanger": {
-							color: getCssVariable("palette-danger-300"),
+							color: getCssVariable("palette-danger-200"),
 						},
 						"&.MuiLink-colorSuccess": {
-							color: getCssVariable("palette-success-300"),
+							color: getCssVariable("palette-success-200"),
 						},
 						"&.MuiLink-colorWarning": {
-							color: getCssVariable("palette-warning-300"),
+							color: getCssVariable("palette-warning-200"),
 						},
+					},
+				},
+			},
+		},
+		JoySelect: {
+			styleOverrides: {
+				root: {
+					"&:focus-within::before": {
+						boxShadow:
+							"inset 0 0 0 var(--Select-focusedThickness) var(--Select-focusedHighlight)",
+					},
+				},
+			},
+		},
+		JoySlider: {
+			styleOverrides: {
+				thumb: {
+					"&:focus-within": {
+						outlineOffset: 0,
+						outline: `${getCssVariable(
+							"focus-thickness",
+							"2px"
+						)} solid ${getCssVariable("palette-focusVisible", "#0B6BCB")}`,
+						outlineWidth: "max(4px, var(--Slider-thumbSize) / 3.6)",
+						outlineColor: `rgba(${getCssVariable(
+							"palette-primary-mainChannel"
+						)} / 0.32)`,
 					},
 				},
 			},
@@ -176,5 +221,6 @@ export const theme = extendTheme({
 	fontFamily: {
 		display: display.style.fontFamily,
 		body: body.style.fontFamily,
+		code: code.style.fontFamily,
 	},
 });

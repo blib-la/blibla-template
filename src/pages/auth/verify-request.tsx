@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useTranslation } from "next-i18next";
 
 import { getStaticProperties } from "@/ions/ssr/get-properties";
-import { Layout } from "@/templates/layout";
+import { Layout } from "@/organisms/layout";
 
 const LottiePlayer = dynamic(
 	() => import("@/atoms/lottie-player").then(module_ => module_.LottiePlayer),
@@ -18,7 +18,10 @@ const LottiePlayer = dynamic(
 export default function Page() {
 	const { t } = useTranslation(["common", "auth"]);
 	return (
-		<Layout sx={{ justifyContent: "center" }}>
+		<Layout
+			seo={{ noIndex: true, title: t("auth:titles.verifyRequest") }}
+			sx={{ justifyContent: "center" }}
+		>
 			<Grid
 				container
 				data-testid="auth-verify-request"
