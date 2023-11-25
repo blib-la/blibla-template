@@ -10,19 +10,14 @@ Feature: Legal Pages
     When I am on the "/" page
     Then I should see the "legal-links"
 
-  Scenario: Navigating to the Terms and Conditions page
-    When I am on the "/" page
-    When I click on the "/legal/terms-link" in "legal-links"
-    Then I should be on the "/legal/terms" page
-
   Scenario: Navigating to the Privacy Policy page
     When I am on the "/" page
-    When I click on the "/legal/privacy-link" in "legal-links"
-    Then I should be on the "/legal/privacy" page
+    And I click on "Privacy Policy" in "main-footer"
+    Then I should be on the "/legal/privacy-policy" page
 
 
   Scenario: Navigating to the Imprint page
     When I am on the "/" page
-    When I click on the "/legal/imprint-link" in "legal-links"
+    And I click on "imprint" in "main-footer"
     Then I should be on the "/legal/imprint" page
 

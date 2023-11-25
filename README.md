@@ -59,7 +59,12 @@ template to match your project requirements:
     - Go to `src/ions/theme/constants.ts`.
     - Alter the `CSS_VARIABLE_PREFIX` to your desired value.
 
-6. **Theme Adjustment (Optional):**
+6. **Create Index Page**
+
+    - Head over to `http://localhost:3000/admin`.
+    - Create a Page with the route "home" and add all required fields
+
+7. **Theme Adjustment (Optional):**
     - Head over to `src/ions/theme/index.ts` for basic theme adjustments.
     - For more granular control, you may venture into `src/ions/theme/palette.ts`, although it's
       strongly discouraged. The existing palette has been meticulously optimized for various aspects

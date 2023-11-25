@@ -7,7 +7,7 @@ import ListItem from "@mui/joy/ListItem";
 import ListItemButton from "@mui/joy/ListItemButton";
 import type { SheetProps } from "@mui/joy/Sheet";
 import Sheet from "@mui/joy/Sheet";
-import Stack from "@mui/joy/Stack";
+import Typography from "@mui/joy/Typography";
 import NextLink from "next/link";
 import { useTranslation } from "next-i18next";
 import { useState } from "react";
@@ -17,6 +17,7 @@ import { StyledNav } from "./styled";
 import { Link, NavLink } from "@/atoms/link";
 import { Logo } from "@/atoms/logo";
 import { useNavigationContext } from "@/ions/contexts/navigation";
+import { Box } from "@/molecules/box";
 import { HEADER_HEIGHT } from "@/organisms/header/constants";
 import { MultiLevelNavigation } from "@/organisms/navigation";
 export function Header(properties: SheetProps) {
@@ -39,45 +40,49 @@ export function Header(properties: SheetProps) {
 			})}
 		>
 			<Container sx={{ px: { xs: 0, md: 0, lg: 0 } }}>
-				<Stack
-					direction="row"
-					justifyContent="space-between"
-					alignItems="center"
-					width="100%"
+				<Box
+					sx={{
+						display: "grid",
+						gridTemplateColumns: "36px auto 36px",
+						gap: 2,
+						alignItems: "center",
+					}}
 				>
-					<Stack direction="row" spacing={4} alignItems="center">
-						<Link
-							color="primary"
-							href="/"
-							aria-label={t("common:navigation.home")}
-							data-testid="app-logo"
-							sx={{
-								display: "inline-flex",
-								height: 36,
-								width: 36,
-								alignItems: "center",
-								justifyContent: "center",
-							}}
-						>
-							<Logo />
-						</Link>
-						<StyledNav sx={{ display: { xs: "none", md: "flex" } }}>
-							{navigation.header.map(link =>
-								link.children ? (
-									<MultiLevelNavigation key={link.href} navigation={link} />
-								) : (
-									<NavLink
-										key={link.href}
-										disableHighlight
-										href={link.href}
-										data-testid="company-link"
-									>
-										{link.label}
-									</NavLink>
-								)
-							)}
-						</StyledNav>
-					</Stack>
+					<Link
+						color="primary"
+						href="/"
+						aria-label={t("common:navigation.home")}
+						data-testid="app-logo"
+						sx={{
+							display: "inline-flex",
+							height: 36,
+							width: 36,
+							alignItems: "center",
+							justifyContent: "center",
+						}}
+					>
+						<Logo />
+					</Link>
+					<Typography sx={{ display: { xs: "block", md: "none" }, textAlign: "center" }}>
+						Blibla
+					</Typography>
+					<StyledNav sx={{ display: { xs: "none", md: "flex" }, alignSelf: "stretch" }}>
+						{navigation.header.map(link =>
+							link.children ? (
+								<MultiLevelNavigation key={link.href} navigation={link} />
+							) : (
+								<NavLink
+									key={link.href}
+									disableHighlight
+									href={link.href}
+									data-testid="company-link"
+									sx={{ flex: 1 }}
+								>
+									{link.label}
+								</NavLink>
+							)
+						)}
+					</StyledNav>
 
 					<IconButton
 						aria-label={t("button:menu")}
@@ -147,7 +152,7 @@ export function Header(properties: SheetProps) {
 							)}
 						</List>
 					</Drawer>
-				</Stack>
+				</Box>
 			</Container>
 		</Sheet>
 	);

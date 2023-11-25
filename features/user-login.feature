@@ -7,8 +7,8 @@ Feature: User Login
     Given the "cookie-banner" is "hidden"
 
   Scenario: Displaying the login form
-    When I am on the "/" page
-    Then I should see the "login-form"
+    When I am on the "/auth/sign-in" page
+    Then I should see the "auth-sign-in"
 
   Scenario: Login
     Given I log in
