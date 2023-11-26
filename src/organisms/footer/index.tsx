@@ -2,7 +2,6 @@ import Container from "@mui/joy/Container";
 import Grid from "@mui/joy/Grid";
 import Link from "@mui/joy/Link";
 import Sheet from "@mui/joy/Sheet";
-import Stack from "@mui/joy/Stack";
 import Typography from "@mui/joy/Typography";
 import { Role } from "@prisma/client";
 import dayjs from "dayjs";
@@ -12,6 +11,7 @@ import { useTranslation } from "next-i18next";
 import { ResponsiveNavlink } from "@/atoms/link";
 import { useDataContext } from "@/ions/contexts/data";
 import { useNavigationContext } from "@/ions/contexts/navigation";
+import { Box } from "@/molecules/box";
 import { ColorModeSelector } from "@/organisms/color-mode-selector";
 import { CookieSettings } from "@/organisms/cookie-banner";
 import { StyledInlineNav, StyledNav, StyledSection } from "@/organisms/footer/styled";
@@ -136,10 +136,16 @@ export function Footer() {
 					</Grid>
 				</Grid>
 				<Grid container columns={{ xs: 1, sm: 2 }} spacing={2} sx={{ my: 0 }}>
-					<Grid xs={1} sx={{ display: "flex", alignItems: "center" }}>
+					<Grid
+						xs={1}
+						sx={{
+							display: "flex",
+							alignItems: "flex-start",
+						}}
+					>
 						<StyledInlineNav
 							data-testid="legal-links"
-							sx={{ width: { xs: "100%", sm: "auto" } }}
+							sx={{ width: { xs: "100%", sm: "auto" }, pt: 0.5 }}
 						>
 							{navigation.legal.map(link => (
 								<ResponsiveNavlink
@@ -153,23 +159,22 @@ export function Footer() {
 						</StyledInlineNav>
 					</Grid>
 					<Grid xs={1} sx={{ display: "flex", justifyContent: "flex-end", gap: 1 }}>
-						<Stack gap={2}>
-							<LanguageSelect />
+						<Box
+							sx={{
+								display: "flex",
+								width: "100%",
+								gap: 2,
+								justifyContent: "flex-end",
+								flexDirection: { xs: "column-reverse", md: "row" },
+							}}
+						>
 							<ColorModeSelector />
 							<CookieSettings />
-						</Stack>
+							<LanguageSelect />
+						</Box>
 					</Grid>
 				</Grid>
-				<Grid container columns={{ xs: 1, sm: 2 }} spacing={2} sx={{ my: 0 }}>
-					<Grid xs={1} sx={{ display: "flex" }}>
-						<StyledInlineNav
-							data-testid="copyright"
-							sx={{ width: { xs: "100%", sm: "auto" } }}
-						>
-							&copy; {dayjs().format("YYYY")} Blibla
-						</StyledInlineNav>
-					</Grid>
-				</Grid>
+				<Box data-testid="copyright">&copy; {dayjs().format("YYYY")} Blibla</Box>
 			</Container>
 		</Sheet>
 	);

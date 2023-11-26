@@ -28,7 +28,7 @@ export function LanguageSelect() {
 			data-testid="language-selector"
 			value={locale}
 			name="language"
-			variant="plain"
+			variant="soft"
 			color="neutral"
 			component="label"
 			sx={{ width: { xs: "100%", sm: "auto" } }}

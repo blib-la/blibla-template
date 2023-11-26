@@ -74,7 +74,7 @@ export function CookieSettings() {
 		<>
 			<Button
 				size="sm"
-				variant="plain"
+				variant="soft"
 				color="neutral"
 				onClick={() => {
 					setDialogOpen(true);

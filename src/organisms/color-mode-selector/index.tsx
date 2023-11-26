@@ -13,7 +13,8 @@ export function ColorModeSelector() {
 			value={mode}
 			variant="soft"
 			color="neutral"
-			sx={{ flex: 1 }}
+			size="sm"
+			sx={{ flex: { xs: 1, md: "initial" } }}
 			onChange={(event, newValue) => {
 				setMode(newValue ?? "system");
 			}}
