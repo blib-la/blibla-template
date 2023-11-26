@@ -11,6 +11,58 @@ import { HEADER_HEIGHT } from "@/organisms/header/constants";
 import { urlForImage } from "~/sanity/lib/image";
 import type { StageModel } from "~/sanity/lib/types";
 
+export function StageBox({
+	headline,
+	subtitle,
+	cta,
+}: Pick<StageModel, "headline" | "subtitle" | "cta">) {
+	return (
+		<Container sx={{ position: "relative" }}>
+			<Sheet
+				invertedColors
+				sx={{
+					position: "absolute",
+					left: 0,
+					bottom: 0,
+					m: 2,
+					px: 4,
+					py: 2,
+					bgcolor: "primary.500",
+					color: "common.white",
+				}}
+			>
+				{headline && (
+					<Typography
+						level="h1"
+						sx={{ my: 1, fontSize: { xs: "xl", sm: "xl4" }, color: "inherit" }}
+					>
+						{headline}
+					</Typography>
+				)}
+				{subtitle && (
+					<Typography
+						level="h2"
+						sx={{ my: 1, fontSize: { xs: "lg", sm: "xl2" }, color: "inherit" }}
+					>
+						{subtitle}
+					</Typography>
+				)}
+				{cta && (
+					<LinkButton
+						href={cta.href}
+						variant="solid"
+						target={cta.href.startsWith("http") ? "_blank" : undefined}
+						sx={{ color: "white" }}
+						rel={cta.href.startsWith("http") ? "noindex nofollow" : undefined}
+					>
+						{cta.label}
+					</LinkButton>
+				)}
+			</Sheet>
+		</Container>
+	);
+}
+
 export function Stage({ stage }: { stage: StageModel }) {
 	const theme = useTheme();
 	return (
@@ -86,46 +138,7 @@ export function Stage({ stage }: { stage: StageModel }) {
 				)}
 			</Box>
 			{(stage.headline || stage.subtitle || stage.cta) && (
-				<Container sx={{ position: "relative" }}>
-					<Sheet
-						invertedColors
-						sx={{
-							position: "absolute",
-							left: 0,
-							bottom: 0,
-							m: 2,
-							p: 4,
-							bgcolor: "primary.500",
-							color: "common.white",
-						}}
-					>
-						{stage.headline && (
-							<Typography
-								level="h1"
-								sx={{ my: 2, fontSize: { xs: "xl", sm: "xl4" }, color: "inherit" }}
-							>
-								{stage.headline}
-							</Typography>
-						)}
-						{stage.subtitle && (
-							<Typography
-								level="h2"
-								sx={{ my: 2, fontSize: { xs: "lg", sm: "xl2" }, color: "inherit" }}
-							>
-								{stage.subtitle}
-							</Typography>
-						)}
-						{stage.cta && (
-							<LinkButton
-								href={stage.cta.href}
-								variant="solid"
-								sx={{ color: "white" }}
-							>
-								{stage.cta.label}
-							</LinkButton>
-						)}
-					</Sheet>
-				</Container>
+				<StageBox headline={stage.headline} subtitle={stage.subtitle} cta={stage.cta} />
 			)}
 		</div>
 	);

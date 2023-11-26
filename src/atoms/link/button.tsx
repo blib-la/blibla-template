@@ -11,7 +11,7 @@ export function LinkButton({
 	sx,
 	href,
 	...properties
-}: { children?: ReactNode; sx?: SxProps; href: LinkProps["href"] } & ButtonProps) {
+}: { children?: ReactNode; sx?: SxProps; href: LinkProps["href"]; target?: string } & ButtonProps) {
 	return (
 		<Link legacyBehavior passHref href={href}>
 			<Button
