@@ -3,14 +3,14 @@ import { styled } from "@mui/joy/styles";
 import Image from "next/image";
 
 import { getImageSize, urlForImage } from "~/sanity/lib/image";
-import type { SpotimageSlot } from "~/sanity/lib/types";
+import type { SpotImageSlot } from "~/sanity/lib/types";
 
 const StyledImage = styled(Image)({
 	width: "100%",
 	height: "auto",
 });
 
-export function SpotImage({ slot }: { slot: SpotimageSlot }) {
+export function SpotImage({ slot }: { slot: SpotImageSlot }) {
 	const { width, height } = getImageSize(slot.mainImage!.asset!._ref);
 	return (
 		<Grid container columnSpacing={2} columns={{ xs: 1 }}>

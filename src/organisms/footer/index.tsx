@@ -104,9 +104,10 @@ export function Footer() {
 							<Typography level="title-md" component="h2">
 								{t("common:contact")}
 							</Typography>
-							<Typography>Blibla</Typography>
 							{address && (
 								<Typography component="div">
+									<div>{address.name}</div>
+
 									<div>
 										{[address.streetName, address.houseNumber]
 											.filter(Boolean)

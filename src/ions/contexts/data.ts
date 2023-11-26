@@ -1,13 +1,12 @@
 import { createContext, useContext } from "react";
 
+import type { AddressDocument } from "~/sanity/lib/types";
+
 export interface Data {
-	[key: string]: any;
+	address?: AddressDocument;
 }
 
-export const DataContext = createContext<Data>({
-	legal: [],
-	company: [],
-});
+export const DataContext = createContext<Data>({});
 
 export const { Provider: DataProvider } = DataContext;
 

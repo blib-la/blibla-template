@@ -152,9 +152,9 @@ export const pageByRouteQuery = groq`
 			_type == "spotImage" => {
 				_type,
 				...@->{
-					"entryType": entry->_type,
-					"mainImage": coalesce(mainImage, entry->mainImage),
-					"excerpt": coalesce(excerpt[_key == $locale][0].value, entry->excerpt[_key == $locale][0].value),
+					"mainImage": mainImage{
+						...
+					},
 				},
 			},
 		)
@@ -229,7 +229,7 @@ export const addressQuery = groq`
 	_type == "address" &&
 	section.current == $section
 ][0]{
-	title,
+	name,
 	section,
 	streetName,
 	houseNumber,

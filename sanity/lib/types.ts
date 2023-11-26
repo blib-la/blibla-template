@@ -34,7 +34,7 @@ export interface AddressDocument {
 	_type: "address";
 	_id: string;
 	_createdAt: string;
-	title?: string;
+	name: string;
 	section: {
 		current: string;
 	};
@@ -127,7 +127,7 @@ export interface TilesSlot {
 export type Slot =
 	| RichTextSlot
 	| SimpleTextSlot
-	| SpotimageSlot
+	| SpotImageSlot
 	| LinkSlot
 	| TilesSlot
 	| PromotedSlot
@@ -183,7 +183,7 @@ export interface SpotlightSlot {
 	cta?: string;
 }
 
-export interface SpotimageSlot {
+export interface SpotImageSlot {
 	_type: "spotImage";
 	id: string;
 	mainImage: SanityImage;

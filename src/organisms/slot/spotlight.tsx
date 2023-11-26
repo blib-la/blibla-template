@@ -73,7 +73,7 @@ export function Spotlight({ slot, even }: { slot: SpotlightSlot; even?: boolean 
 				<StyledBox
 					sx={{
 						height: { xs: 320, md: "auto" },
-						maskImage: { md: "url(/images/home/mask.svg)" },
+						maskImage: { md: "url(/images/mask.svg)" },
 					}}
 				>
 					<StyledImage
