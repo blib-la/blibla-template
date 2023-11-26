@@ -1,9 +1,9 @@
 import CookieIcon from "@mui/icons-material/Cookie";
-import { ModalClose } from "@mui/joy";
 import Alert from "@mui/joy/Alert";
 import Button from "@mui/joy/Button";
 import DialogActions from "@mui/joy/DialogActions";
 import Modal from "@mui/joy/Modal";
+import ModalClose from "@mui/joy/ModalClose";
 import ModalDialog from "@mui/joy/ModalDialog";
 import Stack from "@mui/joy/Stack";
 import Switch from "@mui/joy/Switch";
@@ -74,7 +74,6 @@ export function CookieSettings() {
 	return (
 		<>
 			<Button
-				size="sm"
 				variant="soft"
 				color="neutral"
 				onClick={() => {
