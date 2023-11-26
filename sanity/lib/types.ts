@@ -160,6 +160,7 @@ export interface PromotedSlot {
 	_type: "promoted";
 	id: string;
 	type: string;
+	headline?: string;
 	entries: Entry[];
 }
 

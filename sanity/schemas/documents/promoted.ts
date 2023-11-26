@@ -14,6 +14,12 @@ export default defineType({
 			validation: Rule => Rule.required().error("An internal title is required."),
 		}),
 		defineField({
+			title: "Headline",
+			name: "headline",
+			type: "internationalizedArrayString",
+			description: "A headline to be displayed above the content.",
+		}),
+		defineField({
 			name: "type",
 			title: "Content Type",
 			type: "string",

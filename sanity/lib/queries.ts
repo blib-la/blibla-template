@@ -126,11 +126,12 @@ export const pageByRouteQuery = groq`
 			_type == "promoted" => {
 				...@->{
 					type,
+					"headline": headline[_key == $locale][0].value,
 					"entries": *[_type == ^.type] | order(_createdAt desc)[0...3]{
 						"id": _id,
 						"headline": headline[_key == $locale][0].value,
 						"mainImage": mainImage{
-						...
+							...
 						},
 						"excerpt": excerpt[_key == $locale][0].value,
 						"slug": slug.current
