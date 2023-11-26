@@ -132,7 +132,8 @@ export type Slot =
 	| TilesSlot
 	| PromotedSlot
 	| SpotlightSlot
-	| SlideshowSlot;
+	| SlideshowSlot
+	| PersonSlot;
 
 export interface SimpleTextSlot {
 	_type: "simpleText";
@@ -181,6 +182,19 @@ export interface SpotlightSlot {
 	excerpt: string;
 	slug?: string;
 	cta?: string;
+}
+
+export interface PersonSlot {
+	_type: "person";
+	id: string;
+	firstName: string;
+	lastName: string;
+	pronouns: string;
+	position: string;
+	linkedin: string;
+	github: string;
+	mainImage: SanityImage;
+	biography: string;
 }
 
 export interface SpotImageSlot {

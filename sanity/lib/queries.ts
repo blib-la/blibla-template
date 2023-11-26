@@ -149,6 +149,19 @@ export const pageByRouteQuery = groq`
 					"slug": entry->slug.current,
 				},
 			},
+			_type == "person" => {
+				_type,
+				...@->{
+					firstName,
+					lastName,
+					"pronouns": pronouns[_key == $locale][0].value,
+					position,
+					linkedin,
+					github,
+					"mainImage": coalesce(mainImage, entry->mainImage),
+					"biography": biography[_key == $locale][0].value,
+				},
+			},
 			_type == "spotImage" => {
 				_type,
 				...@->{

@@ -17,6 +17,7 @@ export function SanityNextImage({
 			fill
 			src={urlForImage(image)!.url()}
 			alt={alt}
+			sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
 			style={{
 				objectPosition: `${(image.hotspot?.x ?? 0.5) * 100}% ${
 					(image.hotspot?.y ?? 0.5) * 100

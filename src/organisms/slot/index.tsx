@@ -21,6 +21,7 @@ const Promoted = dynamic(() =>
 const Slideshow = dynamic(() =>
 	import("@/organisms/slot/slideshow").then(module_ => module_.Slideshow)
 );
+const Person = dynamic(() => import("@/organisms/slot/person").then(module_ => module_.Person));
 
 const Tiles = dynamic(() => import("@/organisms/slot/tiles").then(module_ => module_.Tiles));
 
@@ -40,6 +41,10 @@ export function SlotSwitch({ slot, even }: { slot: Slot; even?: boolean }) {
 
 		case "promoted": {
 			return <Promoted slot={slot} />;
+		}
+
+		case "person": {
+			return <Person slot={slot} even={even} />;
 		}
 
 		case "slideshow": {

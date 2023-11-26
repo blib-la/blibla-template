@@ -8,7 +8,7 @@ When(
 	async function (this: ICustomWorld, text: string, element: string) {
 		const page = this.page!;
 		const element_ = page.getByTestId(element);
-		await element_.getByText(text).click();
+		await element_.getByText(text).first().click();
 	}
 );
 
@@ -18,13 +18,13 @@ When(
 		const page = this.page!;
 		const wrapper_ = page.getByTestId(wrapper);
 		await wrapper_.getByTestId(element).scrollIntoViewIfNeeded();
-		await wrapper_.getByTestId(element).click();
+		await wrapper_.getByTestId(element).first().click();
 	}
 );
 
 When("I click on the {string}", async function (this: ICustomWorld, element: string) {
 	const page = this.page!;
-	await page.getByTestId(element).click({ force: true });
+	await page.getByTestId(element).first().click({ force: true });
 });
 
 When("I switch to language {string}", async function (this: ICustomWorld, language: string) {

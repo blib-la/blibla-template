@@ -123,6 +123,12 @@ export default defineType({
 					to: [{ type: "page" }, { type: "post" }],
 				},
 				{
+					title: "Person",
+					name: "person",
+					type: "reference",
+					to: [{ type: "person" }],
+				},
+				{
 					title: "Promoted",
 					name: "promoted",
 					type: "reference",

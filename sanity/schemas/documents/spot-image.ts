@@ -17,6 +17,7 @@ export default defineType({
 			title: "Main Image",
 			type: "image",
 			description: "The primary visual representation for the image.",
+			validation: Rule => Rule.required().error("A main image is required."),
 			options: {
 				hotspot: true,
 			},

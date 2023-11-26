@@ -3,6 +3,7 @@ import type { SchemaTypeDefinition } from "sanity";
 import address from "./documents/address";
 import navigation from "./documents/navigation";
 import page from "./documents/page";
+import person from "./documents/person";
 import post from "./documents/post";
 import promoted from "./documents/promoted";
 import richText from "./documents/rich-text";
@@ -20,6 +21,7 @@ export const schemaTypes = [
 	blockContent,
 	richText,
 	simpleText,
+	person,
 	promoted,
 	slideshow,
 	spotlight,

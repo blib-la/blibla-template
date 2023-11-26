@@ -1,39 +1,13 @@
 import Grid from "@mui/joy/Grid";
-import { styled } from "@mui/joy/styles";
 import Typography from "@mui/joy/Typography";
-import Image from "next/image";
 import { useTranslation } from "next-i18next";
-import type { ReactNode } from "react";
 
 import { LinkButton } from "@/atoms/link/button";
 import { ScreenReaderOnly } from "@/atoms/screen-reader-only";
 import { Box } from "@/molecules/box";
-import type { ImageInfo, LinkData } from "@/types/common";
-import { urlForImage } from "~/sanity/lib/image";
+import { SanityNextImage } from "@/molecules/image";
+import { StyledImageMask } from "@/molecules/image/styled";
 import type { SpotlightSlot } from "~/sanity/lib/types";
-
-export interface SpotlightProperties {
-	children?: ReactNode;
-	reversed?: boolean;
-	image: ImageInfo;
-	cta?: LinkData;
-}
-
-const StyledBox = styled("div")({
-	width: "100%",
-	aspectRatio: 1,
-	maskRepeat: "no-repeat",
-	maskSize: "contain",
-	userSelect: "none",
-	pointerEvents: "none",
-});
-
-const StyledImage = styled(Image)({
-	width: "100%",
-	height: "100%",
-	objectFit: "cover",
-	objectPosition: "center",
-});
 
 export function Spotlight({ slot, even }: { slot: SpotlightSlot; even?: boolean }) {
 	const { t } = useTranslation(["button"]);
@@ -70,19 +44,14 @@ export function Spotlight({ slot, even }: { slot: SpotlightSlot; even?: boolean 
 				order={{ xs: -1, md: even ? -1 : "unset" }}
 				sx={{ display: "flex", alignItems: { md: "center" } }}
 			>
-				<StyledBox
+				<StyledImageMask
 					sx={{
 						height: { xs: 320, md: "auto" },
 						maskImage: { md: "url(/images/mask.svg)" },
 					}}
 				>
-					<StyledImage
-						src={urlForImage(slot.mainImage)!.url()}
-						alt=""
-						width={1024}
-						height={1024}
-					/>
-				</StyledBox>
+					<SanityNextImage image={slot.mainImage} alt="" />
+				</StyledImageMask>
 			</Grid>
 		</Grid>
 	);

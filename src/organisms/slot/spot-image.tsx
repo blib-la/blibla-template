@@ -1,14 +1,8 @@
 import Grid from "@mui/joy/Grid";
-import { styled } from "@mui/joy/styles";
-import Image from "next/image";
 
+import { StyledImage } from "@/molecules/image/styled";
 import { getImageSize, urlForImage } from "~/sanity/lib/image";
 import type { SpotImageSlot } from "~/sanity/lib/types";
-
-const StyledImage = styled(Image)({
-	width: "100%",
-	height: "auto",
-});
 
 export function SpotImage({ slot }: { slot: SpotImageSlot }) {
 	const { width, height } = getImageSize(slot.mainImage!.asset!._ref);
