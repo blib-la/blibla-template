@@ -137,6 +137,7 @@ export function Footer() {
 				</Grid>
 				<Grid container columns={{ xs: 1, sm: 2 }} spacing={2} sx={{ my: 0 }}>
 					<Grid
+						md
 						xs={1}
 						sx={{
 							display: "flex",
@@ -158,13 +159,18 @@ export function Footer() {
 							))}
 						</StyledInlineNav>
 					</Grid>
-					<Grid xs={1} sx={{ display: "flex", justifyContent: "flex-end", gap: 1 }}>
+					<Grid
+						xs={1}
+						md="auto"
+						sx={{ display: "flex", justifyContent: "flex-end", gap: 1 }}
+					>
 						<Box
 							sx={{
 								display: "flex",
 								width: "100%",
 								gap: 2,
 								justifyContent: "flex-end",
+								alignItems: { xs: "stretch", md: "flex-start" },
 								flexDirection: { xs: "column-reverse", md: "row" },
 							}}
 						>
