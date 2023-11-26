@@ -13,6 +13,18 @@ export default defineType({
 			validation: Rule => Rule.required().error("An internal title is required."),
 		}),
 		defineField({
+			name: "columns",
+			title: "Columns",
+			type: "number",
+			description: "Number of columns.",
+			initialValue: 2,
+			validation: Rule => Rule.required().error("Columns are required."),
+			options: {
+				list: [2, 4],
+				layout: "radio",
+			},
+		}),
+		defineField({
 			name: "color",
 			title: "Background Color",
 			type: "string",

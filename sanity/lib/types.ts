@@ -118,6 +118,7 @@ export interface SlideshowSlot {
 export interface TilesSlot {
 	_type: "tiles";
 	id: string;
+	columns: number;
 	color?: DefaultColorPalette;
 	variant?: DefaultVariantProp;
 	items: RichTextSlot[];

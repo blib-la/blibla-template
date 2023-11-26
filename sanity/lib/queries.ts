@@ -95,6 +95,7 @@ export const pageByRouteQuery = groq`
 				...@->{
 					color,
 					variant,
+					columns,
 					"items": items[]{
 						_type,
 						"id": _key,
