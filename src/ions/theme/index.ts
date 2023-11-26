@@ -136,6 +136,11 @@ export const theme = extendTheme({
 		},
 	},
 	components: {
+		JoyAlert: {
+			styleOverrides: {
+				root: { borderRadius: 4 },
+			},
+		},
 		JoyButton: {
 			styleOverrides: {
 				root: { borderRadius: 0 },

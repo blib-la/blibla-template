@@ -3,9 +3,10 @@ import { styled } from "@mui/joy/styles";
 export const StyledBanner = styled("aside")(({ theme }) => ({
 	position: "fixed",
 	left: `max(var(--safe-area-inset-left), ${theme.spacing(2)})`,
+	right: `max(var(--safe-area-inset-left), ${theme.spacing(2)})`,
 	bottom: `max(var(--safe-area-inset-bottom), ${theme.spacing(2)})`,
 	zIndex: theme.zIndex.popup,
-	maxWidth: 700,
+	maxWidth: 600,
 }));
 
 export const StyledButtonWrapper = styled("footer")(({ theme }) => ({
