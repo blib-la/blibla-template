@@ -136,6 +136,11 @@ export const theme = extendTheme({
 		},
 	},
 	components: {
+		JoyButton: {
+			styleOverrides: {
+				root: { borderRadius: 0 },
+			},
+		},
 		JoyCard: {
 			defaultProps: {
 				variant: "plain",
@@ -144,7 +149,16 @@ export const theme = extendTheme({
 				root: { width: "100%", borderRadius: 0 },
 			},
 		},
-
+		JoyIconButton: {
+			styleOverrides: {
+				root: { borderRadius: 0 },
+			},
+		},
+		JoyInput: {
+			styleOverrides: {
+				root: { borderRadius: 0 },
+			},
+		},
 		JoyLink: {
 			styleOverrides: {
 				root: {
@@ -191,6 +205,11 @@ export const theme = extendTheme({
 				},
 			},
 		},
+		JoyModalClose: {
+			styleOverrides: {
+				root: { borderRadius: 0 },
+			},
+		},
 		JoyModalDialog: {
 			defaultProps: {
 				variant: "plain",
@@ -202,10 +221,15 @@ export const theme = extendTheme({
 		JoySelect: {
 			styleOverrides: {
 				root: {
+					borderRadius: 0,
+					boxShadow: "none",
 					"&:focus-within::before": {
 						boxShadow:
 							"inset 0 0 0 var(--Select-focusedThickness) var(--Select-focusedHighlight)",
 					},
+				},
+				listbox: {
+					borderRadius: 0,
 				},
 			},
 		},
@@ -224,6 +248,11 @@ export const theme = extendTheme({
 						)} / 0.32)`,
 					},
 				},
+			},
+		},
+		JoyTextarea: {
+			styleOverrides: {
+				root: { borderRadius: 0 },
 			},
 		},
 	},

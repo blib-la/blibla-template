@@ -1,4 +1,5 @@
 import CookieIcon from "@mui/icons-material/Cookie";
+import { ModalClose } from "@mui/joy";
 import Alert from "@mui/joy/Alert";
 import Button from "@mui/joy/Button";
 import DialogActions from "@mui/joy/DialogActions";
@@ -85,6 +86,7 @@ export function CookieSettings() {
 			<Modal open={dialogOpen} onClose={handleClose}>
 				<ModalDialog invertedColors color="neutral" variant="soft">
 					<Typography>{t("common:cookieBanner.manageCookies")}</Typography>
+					<ModalClose aria-label={t("button:close")} />
 					<Stack gap={2} sx={{ maxWidth: 400, px: 2, pb: 1 }}>
 						<Box>
 							<Switch
@@ -167,8 +169,9 @@ export function CookieSettings() {
 							/>
 						</Box>
 					</Stack>
-					<DialogActions>
+					<DialogActions sx={{ flexDirection: { xs: "column", md: "row" } }}>
 						<Button
+							sx={{ width: { xs: "100%", md: "auto" } }}
 							onClick={() => {
 								acceptAllCookies();
 								handleClose();
@@ -178,15 +181,13 @@ export function CookieSettings() {
 						</Button>
 						<Button
 							variant="plain"
+							sx={{ width: { xs: "100%", md: "auto" } }}
 							onClick={() => {
 								declineAllCookies();
 								handleClose();
 							}}
 						>
 							{t("common:cookieBanner.acceptNecessary")}
-						</Button>
-						<Button color="neutral" variant="plain" onClick={handleClose}>
-							{t("button:close")}
 						</Button>
 					</DialogActions>
 				</ModalDialog>

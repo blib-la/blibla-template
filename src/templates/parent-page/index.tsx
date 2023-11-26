@@ -35,7 +35,7 @@ export function ParentPageTemplate({ page }: { page: ParentPage }) {
 					}))
 					.map(item => (
 						<Grid key={item.id} xs={1} sx={{ display: "flex" }}>
-							<Card sx={{ flex: 1 }}>
+							<Card invertedColors color="neutral" variant="plain" sx={{ flex: 1 }}>
 								<Typography
 									level="title-lg"
 									component="h2"
@@ -54,7 +54,7 @@ export function ParentPageTemplate({ page }: { page: ParentPage }) {
 									<ClampTypography maxLines={4}>{item.excerpt}</ClampTypography>
 								</Box>
 								<CardActions>
-									<LinkButton href={item.href}>
+									<LinkButton color="neutral" href={item.href}>
 										{t("button:readMore")}{" "}
 										<ScreenReaderOnly>{item.href}</ScreenReaderOnly>
 									</LinkButton>

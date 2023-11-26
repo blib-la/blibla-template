@@ -32,7 +32,7 @@ export function Promoted({ slot }: { slot: PromotedSlot }) {
 			<Grid container spacing={2} columns={{ xs: 1, md: 3 }}>
 				{slot.entries.map(entry => (
 					<Grid key={entry.id} xs={1} sx={{ display: "flex" }}>
-						<Card sx={{ flex: 1 }}>
+						<Card invertedColors color="neutral" variant="plain" sx={{ flex: 1 }}>
 							<Typography
 								level="title-lg"
 								component="h3"
@@ -51,7 +51,7 @@ export function Promoted({ slot }: { slot: PromotedSlot }) {
 								<ClampTypography maxLines={4}>{entry.excerpt}</ClampTypography>
 							</Box>
 							<CardActions>
-								<LinkButton href={`/blog/${entry.slug}`}>
+								<LinkButton color="neutral" href={`/blog/${entry.slug}`}>
 									{t("button:readMore")}{" "}
 									<ScreenReaderOnly>{`/blog/${entry.slug}`}</ScreenReaderOnly>
 								</LinkButton>
