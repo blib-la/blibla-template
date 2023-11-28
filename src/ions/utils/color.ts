@@ -29,6 +29,35 @@ export function hexToRGB(hex: string): [number, number, number] {
 	];
 }
 
+export function rgbToHex(r: number, g: number, b: number) {
+	if (![r, g, b].every(value => value >= 0 && value <= 255)) {
+		throw new Error("Invalid RGB value.");
+	}
+
+	return (
+		"#" +
+		[r, g, b]
+			.map(x => {
+				const hex = x.toString(16);
+				return hex.length === 1 ? "0" + hex : hex;
+			})
+			.join("")
+	);
+}
+
+export function mixColors(color1: string, color2: string, percentage: number) {
+	percentage = Math.max(0, Math.min(percentage, 1));
+
+	const [r1, g1, b1] = hexToRGB(color1);
+	const [r2, g2, b2] = hexToRGB(color2);
+
+	const r = Math.round(r1 + (r2 - r1) * percentage);
+	const g = Math.round(g1 + (g2 - g1) * percentage);
+	const b = Math.round(b1 + (b2 - b1) * percentage);
+
+	return rgbToHex(r, g, b);
+}
+
 export function getContrast(background: string, foreground: string) {
 	const luminance1 = getRelativeLuminance(hexToRGB(background));
 	const luminance2 = getRelativeLuminance(hexToRGB(foreground));

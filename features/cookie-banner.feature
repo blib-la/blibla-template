@@ -17,7 +17,7 @@ Feature: Cookie Banner (GDPR)
   Scenario: Accepting necessary cookies from the banner
     Given I am on the "/" page
     And the "cookie-banner" is "visible"
-    When I click on "Accept necessary" in "cookie-banner"
+    When I click on "Decline All" in "cookie-banner"
     Then the "cookie-banner" should be "hidden"
     And "necessary" cookies should be "enabled"
 

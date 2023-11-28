@@ -1,6 +1,7 @@
 import { defineField, defineType } from "sanity";
 
 import type { PostModel, SpotlightSlot } from "~/sanity/lib/types";
+import { hasValidI18N } from "~/sanity/lib/validations";
 
 export default defineType({
 	title: "Spotlight",
@@ -21,11 +22,15 @@ export default defineType({
 			description: "The main heading for the spotlight, visible to users.",
 		}),
 		defineField({
-			name: "excerpt",
-			title: "Excerpt",
-			type: "internationalizedArrayText",
+			name: "body",
+			title: "Content Body",
+			type: "internationalizedArrayBlockContent",
 			description:
-				"A short summary or teaser that provides a glimpse into the spotlight content.",
+				"This is the main content section. You can add and format text, and create links.",
+			validation: Rule => [
+				Rule.required().error("The content body cannot be empty."),
+				hasValidI18N(Rule),
+			],
 		}),
 		defineField({
 			name: "mainImage",
@@ -61,13 +66,13 @@ export default defineType({
 			to: [{ type: "post" }],
 			validation: Rule =>
 				Rule.custom((entry, context) => {
-					const { mainImage, excerpt, headline, cta } = context.parent as SpotlightSlot;
+					const { mainImage, body, headline, cta } = context.parent as SpotlightSlot;
 					if (entry && cta) {
 						return "Ane entry is not allowed when a cta is set. Please remove the CTA or the entry reference.";
 					}
 
-					if (!mainImage && !excerpt && !headline && !entry) {
-						return "An entry reference is required unless a main image, excerpt, or headline is provided.";
+					if (!mainImage && !body && !headline && !entry) {
+						return "An entry reference is required unless a main image, body, or headline is provided.";
 					}
 
 					return true;

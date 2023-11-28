@@ -143,9 +143,11 @@ export const pageByRouteQuery = groq`
 				_type,
 				...@->{
 					"entryType": entry->_type,
-					"headline": coalesce(headline[_key == $locale][0].value, entry->headline[_key == $locale][0].value),
-					"mainImage": coalesce(mainImage, entry->mainImage),
-					"excerpt": coalesce(excerpt[_key == $locale][0].value, entry->excerpt[_key == $locale][0].value),
+					"headline": headline[_key == $locale][0].value,
+					"mainImage": mainImage{
+						...
+					},
+					"body": [body[_key == $locale].value][0][0],
 					"cta": cta->route.current,
 					"slug": entry->slug.current,
 				},
@@ -156,11 +158,11 @@ export const pageByRouteQuery = groq`
 					firstName,
 					lastName,
 					"pronouns": pronouns[_key == $locale][0].value,
-					position,
+					"position": position[_key == $locale][0].value,
 					linkedin,
 					github,
 					"mainImage": coalesce(mainImage, entry->mainImage),
-					"biography": biography[_key == $locale][0].value,
+					"bio": [bio[_key == $locale].value][0][0],
 				},
 			},
 			_type == "spotImage" => {
@@ -188,17 +190,33 @@ section.current == $section
 				"page": *[_id == ^._ref][0]{
 					"route": route.current,
 					"label": label[_key == $locale][0].value
-				}
+				},
+			},
+			_type == "link" => {
+				"link": *[_id == ^._ref][0]{
+					href,
+					"label": label[_key == $locale][0].value
+				},
 			},
 			_type == "navigation" => {
 				"navigation": *[_id == ^._ref][0]{
 					"label": parent -> label[_key == $locale][0].value,
 					"route": parent -> route.current,
 					"links": links[]{
-						"page": *[_type == "page" && _id == ^._ref][0]{
-							"route": route.current,
-							"label": label[_key == $locale][0].value
-						}
+						...select(
+							_type == "page" => {
+								"page": *[_id == ^._ref][0]{
+									"route": route.current,
+									"label": label[_key == $locale][0].value
+								},
+							},
+							_type == "link" => {
+								"link": *[_id == ^._ref][0]{
+									href,
+									"label": label[_key == $locale][0].value
+								},
+							}
+						)
 					}
 				}
 			}
@@ -254,6 +272,12 @@ export const addressQuery = groq`
 	country,
 	notes,
 	email,
+	discord,
+	github,
+	huggingface,
+	youtube,
+	x,
+	twitch,
 	phone
 }
 `;

@@ -7,6 +7,7 @@ import { ScreenReaderOnly } from "@/atoms/screen-reader-only";
 import { Box } from "@/molecules/box";
 import { SanityNextImage } from "@/molecules/image";
 import { StyledImageMask } from "@/molecules/image/styled";
+import { RichTextBlock } from "@/organisms/rich-text";
 import type { SpotlightSlot } from "~/sanity/lib/types";
 
 export function Spotlight({ slot, even }: { slot: SpotlightSlot; even?: boolean }) {
@@ -18,14 +19,7 @@ export function Spotlight({ slot, even }: { slot: SpotlightSlot; even?: boolean 
 					<Typography level="h2" mt={2} mb={3}>
 						{slot.headline}
 					</Typography>
-					{slot.excerpt
-						.split("\n")
-						.filter(Boolean)
-						.map((paragraph, index) => (
-							<Typography key={index} my={2}>
-								{paragraph}
-							</Typography>
-						))}
+					<RichTextBlock value={slot.body} />
 					{slot.slug && (
 						<LinkButton href={`/blog/${slot.slug}`}>
 							{t("button:readMore")}{" "}

@@ -44,13 +44,13 @@ export async function getNavigation(client: SanityClient, section: string, local
 		})
 		.then(
 			navigation =>
-				navigation?.links.map(({ page, navigation }) => ({
-					href: `/${page?.route ?? navigation?.route}`,
-					label: page?.label ?? navigation?.label ?? null,
+				navigation?.links.map(({ page, link, navigation }) => ({
+					href: link?.href ?? `/${page?.route ?? navigation?.route}`,
+					label: link?.label ?? page?.label ?? navigation?.label ?? null,
 					children:
-						navigation?.links.map(({ page }) => ({
-							href: `/${page?.route}`,
-							label: page?.label ?? null,
+						navigation?.links.map(({ page, link }) => ({
+							href: link?.href ?? `/${page?.route}`,
+							label: link?.label ?? page?.label ?? null,
 						})) ?? null,
 				}))
 		);

@@ -14,13 +14,14 @@ import { useTranslation } from "next-i18next";
 
 import { NavLink } from "@/atoms/link";
 import { cookieSettingsOpenAtom } from "@/ions/atoms/common";
+import { useNavigationContext } from "@/ions/contexts/navigation";
 import { Box } from "@/molecules/box";
 import { StyledBanner, StyledButtonWrapper } from "@/organisms/cookie-banner/styled";
 
 export function CookieBanner() {
 	const { declineAllCookies, acceptAllCookies, consent } = useCookieConsentContext();
 	const { t } = useTranslation(["common"]);
-	const [, setDialogOpen] = useAtom(cookieSettingsOpenAtom);
+	const navigation = useNavigationContext();
 
 	return (
 		!consent.necessary && (
@@ -31,16 +32,29 @@ export function CookieBanner() {
 					sx={{ alignItems: "flex-start", boxShadow: "md" }}
 				>
 					<div>
-						<Typography startDecorator={<CookieIcon />}>
+						<Typography
+							startDecorator={<CookieIcon />}
+							sx={{ alignItems: "flex-start" }}
+						>
 							{t("common:cookieBanner.cookieMessage")}
 						</Typography>
-						<div>
-							<NavLink disableHighlight color="neutral" href="/legal/privacy">
-								{t("common:navigation.privacy")}
-							</NavLink>
-						</div>
+						{navigation.cookieBanner?.length > 0 && (
+							<Box sx={{ mt: 2, display: "flex", gap: 1, flexWrap: "wrap" }}>
+								{navigation.cookieBanner.map(link => (
+									<NavLink
+										key={link.href}
+										disableHighlight
+										color="neutral"
+										href={link.href}
+									>
+										{link.label}
+									</NavLink>
+								))}
+							</Box>
+						)}
 						<StyledButtonWrapper>
 							<Button
+								autoFocus
 								sx={{ width: { xs: "100%", sm: "auto" } }}
 								color="success"
 								onClick={acceptAllCookies}
@@ -49,21 +63,11 @@ export function CookieBanner() {
 							</Button>
 							<Button
 								sx={{ width: { xs: "100%", sm: "auto" } }}
-								variant="plain"
+								variant="soft"
 								color="neutral"
 								onClick={declineAllCookies}
 							>
-								{t("common:cookieBanner.acceptNecessary")}
-							</Button>
-							<Button
-								sx={{ width: { xs: "100%", sm: "auto" } }}
-								variant="plain"
-								color="neutral"
-								onClick={() => {
-									setDialogOpen(true);
-								}}
-							>
-								{t("common:cookieBanner.configureCookies")}
+								{t("common:cookieBanner.declineAll")}
 							</Button>
 						</StyledButtonWrapper>
 					</div>
@@ -199,7 +203,7 @@ export function CookieSettings() {
 							{t("common:cookieBanner.acceptAll")}
 						</Button>
 						<Button
-							variant="plain"
+							variant="soft"
 							color="neutral"
 							sx={{ width: { xs: "100%", md: "auto" } }}
 							onClick={() => {
@@ -207,7 +211,7 @@ export function CookieSettings() {
 								handleClose();
 							}}
 						>
-							{t("common:cookieBanner.acceptNecessary")}
+							{t("common:cookieBanner.declineAll")}
 						</Button>
 					</DialogActions>
 				</ModalDialog>
