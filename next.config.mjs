@@ -67,7 +67,12 @@ const nextConfig = {
 		formats: ["image/webp"],
 	},
 	async rewrites() {
-		const rewrites = [];
+		const rewrites = [
+			{
+				source: "/sitemap.xml",
+				destination: "/api/sitemap",
+			},
+		];
 
 		// Generate rewrites for all extraLocales
 		for (const route of routes) {

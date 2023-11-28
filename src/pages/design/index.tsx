@@ -14,11 +14,14 @@ import type { TypographySystem } from "@mui/joy/styles/types";
 import Switch from "@mui/joy/Switch";
 import Typography from "@mui/joy/Typography";
 import humanizeString from "humanize-string";
+import type { GetStaticPropsContext } from "next";
 import { upperCaseFirst } from "upper-case-first";
 
+import { getStaticProperties } from "@/ions/ssr/get-properties";
 import type { ColorShades, Palette } from "@/ions/theme/palette";
 import { palette } from "@/ions/theme/palette";
 import { getContrastColor } from "@/ions/utils/color";
+import { Layout } from "@/organisms/layout";
 
 /**
  * This file encompasses various local functions and other declarations, primarily serving demonstrative purposes.
@@ -114,15 +117,55 @@ const StyledBox = styled("div")(({ theme }) => ({
 	marginBottom: theme.spacing(4),
 	flexWrap: "wrap",
 }));
-
-export function DesignSystem() {
+export default function Page() {
 	return (
-		<>
+		<Layout seo={{ noIndex: true, title: "Design System" }}>
 			{typeLevels.map(typeLevel => (
 				<Typography key={typeLevel} level={typeLevel} component="div">
 					Typography Level: {typeLevel}
 				</Typography>
 			))}
+			<Grid container spacing={2} columns={{ xs: 1, md: 2 }} sx={{ my: 4 }}>
+				<Grid xs={1}>
+					<Typography level="h2" mb={2}>
+						Harmonized Color for Enhanced User Experience
+					</Typography>
+					<Typography>
+						At the heart of our public design system lies a commitment to crafting
+						exceptional user experiences, and our latest initiative embodies this ethos
+						- a meticulously curated, homogeneous color palette. This isn&apos;t merely
+						an aesthetic upgrade; it&apos;s a strategic enhancement to our user
+						interfaces, making them more intuitive and robust. Our comprehensive range
+						of 500-shade colors isn’t just pleasing to the eye; it&apos;s AA compliant
+						against both black and white, ensuring that accessibility is not an
+						afterthought but a core consideration. By optimizing these shades to pair
+						flawlessly with white text, we enhance text visibility, creating a more
+						user-friendly interface. This unified approach does not only add visual
+						appeal but also fosters better user understanding, setting the stage for a
+						seamless and engaging user journey through our digital landscape.
+					</Typography>
+				</Grid>
+				<Grid xs={1}>
+					<Typography level="h2" mb={2}>
+						Intuitive Design with Strategic Color Integration
+					</Typography>
+					<Typography>
+						Embracing a palette that works as hard as our designers and developers do,
+						we&apos;re integrating strategy with aesthetics. Our palette has been
+						crafted with component compatibility in mind, ensuring that colors
+						seamlessly fit across all design elements. The intuitive gradients and broad
+						hue range, including 9 distinct hues and a neutral grey, offer our designers
+						the diversity needed to make bold and innovative design choices without
+						compromising on inter-hue harmony. This thoughtful curation guarantees that
+						our UI remains harmonious, regardless of the complexity or simplicity of the
+						design. Moreover, the wide compatibility of our color system means that it
+						blends effortlessly with various UI elements and layouts, embodying a fusion
+						of design intuition with top-tier development practices. By leveraging this
+						strategic color integration, we&apos;re dedicated to delivering a cohesive,
+						user-centric product that stands out in the digital realm.
+					</Typography>
+				</Grid>
+			</Grid>
 
 			<PaletteDisplay palette={palette} />
 			<Typography level="h2">Button</Typography>
@@ -238,6 +281,10 @@ export function DesignSystem() {
 					))}
 				</StyledBox>
 			))}
-		</>
+		</Layout>
 	);
+}
+
+export async function getStaticProps(context: GetStaticPropsContext) {
+	return getStaticProperties(context);
 }
