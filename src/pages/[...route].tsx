@@ -1,3 +1,6 @@
+import path from "node:path";
+
+import { globby } from "globby";
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import type { GetStaticPathsContext } from "next";
 
@@ -41,11 +44,21 @@ export async function getStaticProps(
 export async function getStaticPaths(context: GetStaticPathsContext) {
 	const client = getClient();
 	const routes = await client.fetch<string[]>(pageRoutesQuery);
+	const mdxFiles = await globby(`src/pages/**/index.mdx`);
+	const mdxRoutes = mdxFiles.map(filePath => {
+		const relativePath = path.relative("src/pages", filePath).replaceAll("\\", "/");
+		return path.dirname(relativePath);
+	});
 	const paths =
-		routes?.flatMap(
-			route =>
-				context.locales?.map(locale => ({ locale, params: { route: route.split("/") } }))
-		) || [];
+		routes
+			?.filter(route => !["home", ...mdxRoutes].includes(route))
+			.flatMap(
+				route =>
+					context.locales?.map(locale => ({
+						locale,
+						params: { route: route.split("/") },
+					}))
+			) || [];
 
 	return {
 		paths,
