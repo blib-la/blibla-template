@@ -21,6 +21,7 @@ export async function getStaticProperties(
 	const legal = await getNavigation(client, "legal", locale!);
 	const company = await getNavigation(client, "company", locale!);
 	const community = await getNavigation(client, "community", locale!);
+	const cookieBanner = await getNavigation(client, "cookie-banner", locale!);
 	const address = await getAddress(client, "contact");
 
 	return {
@@ -35,6 +36,7 @@ export async function getStaticProperties(
 				legal: legal ?? [],
 				company: company ?? [],
 				community: community ?? [],
+				cookieBanner: cookieBanner ?? [],
 			},
 		},
 	};
@@ -50,6 +52,7 @@ export async function getServerSideProperties(
 	const legal = await getNavigation(client, "legal", locale!);
 	const company = await getNavigation(client, "company", locale!);
 	const community = await getNavigation(client, "community", locale!);
+	const cookieBanner = await getNavigation(client, "cookie-banner", locale!);
 	const address = await getAddress(client, "contact");
 	return {
 		props: {
@@ -63,6 +66,7 @@ export async function getServerSideProperties(
 				legal: legal ?? [],
 				company: company ?? [],
 				community: community ?? [],
+				cookieBanner: cookieBanner ?? [],
 			},
 		},
 	};

@@ -33,16 +33,16 @@ export default defineType({
 			description: "The person's pronouns.",
 		}),
 		defineField({
+			name: "position",
+			title: "Position",
+			type: "internationalizedArrayString",
+			description: "The position in the company.",
+		}),
+		defineField({
 			name: "linkedin",
 			title: "LinkedIn",
 			type: "url",
 			description: "LinkedIn url of the person.",
-		}),
-		defineField({
-			name: "position",
-			title: "Position",
-			type: "string",
-			description: "The position in the company.",
 		}),
 		defineField({
 			name: "github",
@@ -62,9 +62,9 @@ export default defineType({
 			},
 		}),
 		defineField({
-			name: "biography",
+			name: "bio",
 			title: "Biography",
-			type: "internationalizedArrayText",
+			type: "internationalizedArrayBlockContent",
 			description: "A brief biography of the person.",
 			validation: Rule => [
 				Rule.required().error("An biography is required."),

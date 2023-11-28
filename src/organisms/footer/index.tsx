@@ -1,10 +1,12 @@
 import Container from "@mui/joy/Container";
 import Grid from "@mui/joy/Grid";
+import IconButton from "@mui/joy/IconButton";
 import Link from "@mui/joy/Link";
 import Sheet from "@mui/joy/Sheet";
 import Typography from "@mui/joy/Typography";
 import { Role } from "@prisma/client";
 import dayjs from "dayjs";
+import dynamic from "next/dynamic";
 import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 
@@ -16,6 +18,15 @@ import { ColorModeSelector } from "@/organisms/color-mode-selector";
 import { CookieSettings } from "@/organisms/cookie-banner";
 import { StyledInlineNav, StyledNav, StyledSection } from "@/organisms/footer/styled";
 import { LanguageSelect } from "@/organisms/language-select";
+
+const GitHubIcon = dynamic(() => import("@/atoms/icons").then(module_ => module_.GitHubIcon));
+const HuggingfaceIcon = dynamic(() =>
+	import("@/atoms/icons").then(module_ => module_.HuggingfaceIcon)
+);
+const TwitchIcon = dynamic(() => import("@/atoms/icons").then(module_ => module_.TwitchIcon));
+const XIcon = dynamic(() => import("@/atoms/icons").then(module_ => module_.XIcon));
+const YouTubeIcon = dynamic(() => import("@/atoms/icons").then(module_ => module_.YouTubeIcon));
+const DiscordIcon = dynamic(() => import("@/atoms/icons").then(module_ => module_.DiscordIcon));
 
 export function Footer() {
 	const { t } = useTranslation(["common"]);
@@ -181,7 +192,79 @@ export function Footer() {
 						</Box>
 					</Grid>
 				</Grid>
-				<Box data-testid="copyright">&copy; {dayjs().format("YYYY")} Blibla</Box>
+				<Box
+					sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
+				>
+					<Box data-testid="copyright">&copy; {dayjs().format("YYYY")} Blibla</Box>
+					<Box data-testid="social-links">
+						{address?.github && (
+							<IconButton
+								component="a"
+								href={address.github}
+								target="_blank"
+								rel="noindex nofollow"
+								aria-label="GitHub"
+							>
+								<GitHubIcon />
+							</IconButton>
+						)}
+						{address?.huggingface && (
+							<IconButton
+								component="a"
+								href={address.huggingface}
+								target="_blank"
+								rel="noindex nofollow"
+								aria-label="Huggingface"
+							>
+								<HuggingfaceIcon />
+							</IconButton>
+						)}
+						{address?.discord && (
+							<IconButton
+								component="a"
+								href={address.discord}
+								target="_blank"
+								rel="noindex nofollow"
+								aria-label="Discord"
+							>
+								<DiscordIcon sx={{ color: "#5865F2" }} />
+							</IconButton>
+						)}
+						{address?.youtube && (
+							<IconButton
+								component="a"
+								href={address.youtube}
+								target="_blank"
+								rel="noindex nofollow"
+								aria-label="Youtube"
+							>
+								<YouTubeIcon sx={{ color: "#FF0000" }} />
+							</IconButton>
+						)}
+						{address?.x && (
+							<IconButton
+								component="a"
+								href={address.x}
+								target="_blank"
+								rel="noindex nofollow"
+								aria-label="X"
+							>
+								<XIcon />
+							</IconButton>
+						)}
+						{address?.twitch && (
+							<IconButton
+								component="a"
+								href={address.twitch}
+								target="_blank"
+								rel="noindex nofollow"
+								aria-label="Twitch"
+							>
+								<TwitchIcon sx={{ color: "#6441a5" }} />
+							</IconButton>
+						)}
+					</Box>
+				</Box>
 			</Container>
 		</Sheet>
 	);

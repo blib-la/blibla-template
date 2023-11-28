@@ -17,6 +17,13 @@ export interface PostDocument {
 	mainImage: ImageAsset;
 	body: PortableTextBlock[];
 }
+export interface LinkDocument {
+	_type: "link";
+	_id: string;
+	id: string;
+	label: string;
+	href: string;
+}
 
 export interface NavigationDocument {
 	_type: "navigation";
@@ -26,8 +33,8 @@ export interface NavigationDocument {
 	parent?: PageDocument;
 	route?: Slug;
 	label?: string;
-	links: { page?: PageDocument; navigation?: NavigationDocument }[];
-	children: { page?: PageDocument };
+	links: { page?: PageDocument; link?: LinkDocument; navigation?: NavigationDocument }[];
+	children: { page?: PageDocument; link?: LinkDocument };
 }
 
 export interface AddressDocument {
@@ -47,6 +54,12 @@ export interface AddressDocument {
 	country?: string;
 	notes?: string;
 	email?: string;
+	discord?: string;
+	github?: string;
+	huggingface?: string;
+	youtube?: string;
+	x?: string;
+	twitch?: string;
 	phone?: string;
 }
 
@@ -180,7 +193,7 @@ export interface SpotlightSlot {
 	entryType: string;
 	headline: string;
 	mainImage: SanityImage;
-	excerpt: string;
+	body: PortableTextBlock;
 	slug?: string;
 	cta?: string;
 }
@@ -195,7 +208,7 @@ export interface PersonSlot {
 	linkedin: string;
 	github: string;
 	mainImage: SanityImage;
-	biography: string;
+	bio: PortableTextBlock;
 }
 
 export interface SpotImageSlot {

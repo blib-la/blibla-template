@@ -1,4 +1,11 @@
-import { getContrast, getContrastColor, getRelativeLuminance, hexToRGB } from "../color";
+import {
+	getContrast,
+	getContrastColor,
+	getRelativeLuminance,
+	hexToRGB,
+	mixColors,
+	rgbToHex,
+} from "../color";
 
 describe("getContrastColor", () => {
 	it("should return black for light colors", () => {
@@ -101,5 +108,50 @@ describe("getContrast", () => {
 		const result1 = getContrast("#ffffff", "#595959");
 		const result2 = getContrast("#595959", "#ffffff");
 		expect(result1).toEqual(result2);
+	});
+});
+
+describe("mixColors", () => {
+	it("should mix two colors evenly when percentage is 0.5", () => {
+		const result = mixColors("#ff0000", "#0000ff", 0.5);
+		expect(result).toBe("#800080");
+	});
+
+	it("should return color1 when percentage is 0", () => {
+		const result = mixColors("#ff0000", "#0000ff", 0);
+		expect(result).toBe("#ff0000");
+	});
+
+	it("should return color2 when percentage is 1", () => {
+		const result = mixColors("#ff0000", "#0000ff", 1);
+		expect(result).toBe("#0000ff");
+	});
+
+	it("should correctly mix two colors with a non-50% percentage", () => {
+		const result = mixColors("#ffffff", "#000000", 0.25);
+		expect(result).toBe("#bfbfbf");
+	});
+
+	it("should handle invalid percentage by clamping to valid range", () => {
+		const result = mixColors("#ff0000", "#0000ff", -0.1);
+		expect(result).toBe("#ff0000");
+	});
+});
+
+describe("rgbToHex", () => {
+	it("should correctly convert RGB to HEX", () => {
+		expect(rgbToHex(255, 255, 255)).toBe("#ffffff");
+		expect(rgbToHex(0, 0, 0)).toBe("#000000");
+		expect(rgbToHex(173, 216, 230)).toBe("#add8e6");
+	});
+
+	it("should handle single digit hex values by padding with zero", () => {
+		expect(rgbToHex(1, 2, 3)).toBe("#010203");
+	});
+
+	it("should throw error for invalid RGB values", () => {
+		expect(() => rgbToHex(256, 0, 0)).toThrow("Invalid RGB value.");
+		expect(() => rgbToHex(0, -1, 0)).toThrow("Invalid RGB value.");
+		expect(() => rgbToHex(0, 0, 300)).toThrow("Invalid RGB value.");
 	});
 });

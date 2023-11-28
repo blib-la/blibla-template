@@ -7,6 +7,7 @@ import Typography from "@mui/joy/Typography";
 import { Box } from "@/molecules/box";
 import { SanityNextImage } from "@/molecules/image";
 import { StyledImageMask } from "@/molecules/image/styled";
+import { RichTextBlock } from "@/organisms/rich-text";
 import type { PersonSlot } from "~/sanity/lib/types";
 
 export function Person({ slot, even }: { slot: PersonSlot; even?: boolean }) {
@@ -23,14 +24,7 @@ export function Person({ slot, even }: { slot: PersonSlot; even?: boolean }) {
 					<Typography level="title-lg" component="h4" mt={1} mb={3}>
 						{slot.position}
 					</Typography>
-					{slot.biography
-						.split("\n")
-						.filter(Boolean)
-						.map((paragraph, index) => (
-							<Typography key={index} my={2}>
-								{paragraph}
-							</Typography>
-						))}
+					<RichTextBlock value={slot.bio} />
 					<Box sx={{ display: "flex", flexDirection: "column" }}>
 						{slot.linkedin && (
 							<JoyLink

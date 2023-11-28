@@ -2,7 +2,7 @@ import { extendTheme } from "@mui/joy/styles";
 
 import { body, code, display } from "@/ions/fonts";
 import { CSS_VARIABLE_PREFIX } from "@/ions/theme/constants";
-import { palette } from "@/ions/theme/palette";
+import { background, palette } from "@/ions/theme/palette";
 import { getCssVariable } from "@/ions/theme/utils";
 import { hexToRGB } from "@/ions/utils/color";
 
@@ -71,6 +71,9 @@ export const theme = extendTheme({
 					secondary: getCssVariable("palette-neutral-800"),
 					tertiary: getCssVariable("palette-neutral-700"),
 				},
+				background: {
+					body: background.light.body,
+				},
 			},
 		},
 		dark: {
@@ -132,6 +135,9 @@ export const theme = extendTheme({
 					secondary: getCssVariable("palette-neutral-100"),
 					tertiary: getCssVariable("palette-neutral-200"),
 				},
+				background: {
+					body: background.dark.body,
+				},
 			},
 		},
 	},
@@ -161,7 +167,7 @@ export const theme = extendTheme({
 		},
 		JoyInput: {
 			styleOverrides: {
-				root: { borderRadius: 0 },
+				root: { borderRadius: 0, boxShadow: "none" },
 			},
 		},
 		JoyLink: {
@@ -257,7 +263,7 @@ export const theme = extendTheme({
 		},
 		JoyTextarea: {
 			styleOverrides: {
-				root: { borderRadius: 0 },
+				root: { borderRadius: 0, boxShadow: "none" },
 			},
 		},
 	},

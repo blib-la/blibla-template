@@ -6,7 +6,7 @@ export const StyledBanner = styled("aside")(({ theme }) => ({
 	right: `max(var(--safe-area-inset-left), ${theme.spacing(2)})`,
 	bottom: `max(var(--safe-area-inset-bottom), ${theme.spacing(2)})`,
 	zIndex: theme.zIndex.popup,
-	maxWidth: 600,
+	maxWidth: 500,
 }));
 
 export const StyledButtonWrapper = styled("footer")(({ theme }) => ({

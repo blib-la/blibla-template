@@ -1,6 +1,7 @@
 import type { SchemaTypeDefinition } from "sanity";
 
 import address from "./documents/address";
+import link from "./documents/link";
 import navigation from "./documents/navigation";
 import page from "./documents/page";
 import person from "./documents/person";
@@ -20,6 +21,7 @@ export const schemaTypes = [
 	seo,
 	blockContent,
 	richText,
+	link,
 	simpleText,
 	person,
 	promoted,

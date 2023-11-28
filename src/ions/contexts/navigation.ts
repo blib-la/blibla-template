@@ -15,6 +15,7 @@ export const NavigationContext = createContext<Navigation>({
 	legal: [],
 	company: [],
 	community: [],
+	cookieBanner: [],
 });
 
 export const { Provider: NavigationProvider } = NavigationContext;

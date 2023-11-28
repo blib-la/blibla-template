@@ -1,3 +1,4 @@
+import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/joy/Container";
 import Divider from "@mui/joy/Divider";
@@ -5,19 +6,17 @@ import Drawer from "@mui/joy/Drawer";
 import IconButton from "@mui/joy/IconButton";
 import List from "@mui/joy/List";
 import ListItem from "@mui/joy/ListItem";
-import ListItemButton from "@mui/joy/ListItemButton";
 import type { SheetProps } from "@mui/joy/Sheet";
 import Sheet from "@mui/joy/Sheet";
 import Typography from "@mui/joy/Typography";
 import { Role } from "@prisma/client";
-import NextLink from "next/link";
 import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { useState } from "react";
 
 import { StyledNav } from "./styled";
 
-import { Link, NavLink } from "@/atoms/link";
+import { Link, ListItemLink, NavLink } from "@/atoms/link";
 import { Logo } from "@/atoms/logo";
 import { useNavigationContext } from "@/ions/contexts/navigation";
 import { Box } from "@/molecules/box";
@@ -71,7 +70,12 @@ export function Header(properties: SheetProps) {
 					<Typography sx={{ display: { xs: "block", md: "none" }, textAlign: "center" }}>
 						Blibla
 					</Typography>
-					<StyledNav sx={{ display: { xs: "none", md: "flex" }, alignSelf: "stretch" }}>
+					<StyledNav
+						sx={{
+							display: { xs: "none", md: "flex", justifyContent: "flex-start" },
+							alignSelf: "stretch",
+						}}
+					>
 						{navigation.header.map(link =>
 							link.children ? (
 								<MultiLevelNavigation key={link.href} navigation={link} />
@@ -81,7 +85,6 @@ export function Header(properties: SheetProps) {
 									disableHighlight
 									href={link.href}
 									data-testid="company-link"
-									sx={{ flex: 1 }}
 								>
 									{link.label}
 								</NavLink>
@@ -107,6 +110,7 @@ export function Header(properties: SheetProps) {
 						slotProps={{
 							content: {
 								sx: {
+									pt: `${HEADER_HEIGHT}px`,
 									width: 280,
 								},
 							},
@@ -115,6 +119,20 @@ export function Header(properties: SheetProps) {
 							setMobileMenuOpen(false);
 						}}
 					>
+						<IconButton
+							aria-label={t("button:close")}
+							sx={theme => ({
+								position: "absolute",
+								top: theme.spacing(1),
+								left: theme.spacing(1),
+							})}
+							onClick={() => {
+								setMobileMenuOpen(false);
+							}}
+						>
+							<CloseIcon />
+						</IconButton>
+						<Divider />
 						<List
 							sx={{ "--List-nestedInsetStart": "1rem", flex: "initial" }}
 							onClick={() => {
@@ -124,72 +142,51 @@ export function Header(properties: SheetProps) {
 							{navigation.header.map(link =>
 								link.children ? (
 									<ListItem key={link.href} nested>
-										<NextLink passHref legacyBehavior href={link.href}>
-											<ListItemButton component="a">
-												{link.label}
-											</ListItemButton>
-										</NextLink>
+										<ListItemLink href={link.href}>{link.label}</ListItemLink>
 										<List>
 											{link.children.map(child => (
 												<ListItem key={child.href}>
-													<NextLink
-														passHref
-														legacyBehavior
-														href={child.href}
-													>
-														<ListItemButton component="a">
-															{child.label}
-														</ListItemButton>
-													</NextLink>
+													<ListItemLink href={child.href}>
+														{child.label}
+													</ListItemLink>
 												</ListItem>
 											))}
 										</List>
 									</ListItem>
 								) : (
 									<ListItem key={link.href}>
-										<NextLink passHref legacyBehavior href={link.href}>
-											<ListItemButton component="a">
-												{link.label}
-											</ListItemButton>
-										</NextLink>
+										<ListItemLink href={link.href}>{link.label}</ListItemLink>
 									</ListItem>
 								)
 							)}
 						</List>
+						<Divider />
 						{session?.user.role && (
 							<>
-								<Divider />
-								<List>
+								<List sx={{ flex: "initial" }}>
 									<ListItem>
-										<NextLink passHref legacyBehavior href="/profile">
-											<ListItemButton
-												component="a"
-												data-testid="profile-link"
-											>
-												{t("common:navigation.profile")}
-											</ListItemButton>
-										</NextLink>
+										<ListItemLink href="/profile" data-testid="profile-link">
+											{t("common:navigation.profile")}
+										</ListItemLink>
 									</ListItem>
 
 									{session.user.role === Role.ADMIN && (
-										<NextLink passHref legacyBehavior href="/admin" locale="en">
-											<ListItemButton
-												component="a"
-												target="_blank"
-												data-testid="admin-link"
-											>
-												{t("common:navigation.admin")}
-											</ListItemButton>
-										</NextLink>
+										<ListItemLink
+											target="_blank"
+											href="/admin"
+											locale="en"
+											data-testid="admin-link"
+										>
+											{t("common:navigation.admin")}
+										</ListItemLink>
 									)}
 									<ListItem>
-										<NextLink passHref legacyBehavior href="/auth/sign-out">
-											<ListItemButton component="a">
-												{t("button:signOut")}
-											</ListItemButton>
-										</NextLink>
+										<ListItemLink href="/auth/sign-out">
+											{t("button:signOut")}
+										</ListItemLink>
 									</ListItem>
 								</List>
+								<Divider />
 							</>
 						)}
 					</Drawer>

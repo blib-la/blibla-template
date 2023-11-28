@@ -120,6 +120,42 @@ export default defineType({
 			validation: Rule => Rule.email().error("A valid email address is required."),
 		}),
 		defineField({
+			name: "discord",
+			title: "Discord",
+			type: "string",
+			description: "Discord server invite URL.",
+		}),
+		defineField({
+			name: "github",
+			title: "GitHub",
+			type: "string",
+			description: "GitHub profile URL.",
+		}),
+		defineField({
+			name: "huggingface",
+			title: "Huggingface",
+			type: "string",
+			description: "Huggingface profile URL.",
+		}),
+		defineField({
+			name: "youtube",
+			title: "Youtube",
+			type: "string",
+			description: "Youtube channel URL.",
+		}),
+		defineField({
+			name: "x",
+			title: "X",
+			type: "string",
+			description: "X profile URL.",
+		}),
+		defineField({
+			name: "twitch",
+			title: "Twitch",
+			type: "string",
+			description: "Twitch channel URL.",
+		}),
+		defineField({
 			name: "phone",
 			title: "Contact Phone Number",
 			type: "string",

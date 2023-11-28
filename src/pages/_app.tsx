@@ -35,7 +35,7 @@ function App({
 	Component,
 	pageProps: { session, navigation, address, ...pageProperties },
 }: AppProps<{ session?: Session; navigation: Navigation; address: AddressDocument }>) {
-	const { locale } = useRouter();
+	const { locale, asPath } = useRouter();
 
 	// Intended abuse of useMemo to allow changes on server and client mount
 	useMemo(() => {
@@ -79,7 +79,7 @@ function App({
 						<DataProvider value={{ address }}>
 							<NavigationProvider value={navigation}>
 								<Component {...pageProperties} />
-								<CookieBanner />
+								{!asPath.startsWith("/admin") && <CookieBanner />}
 							</NavigationProvider>
 						</DataProvider>
 					</SWRConfig>

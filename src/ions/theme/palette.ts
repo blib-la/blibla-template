@@ -1,3 +1,5 @@
+import { mixColors } from "@/ions/utils/color";
+
 export type Shade = "50" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
 export type ColorShades = Record<Shade, string>;
 
@@ -134,5 +136,14 @@ export const palette: Palette = {
 		700: "#463EB0",
 		800: "#352D8C",
 		900: "#281E6A",
+	},
+};
+
+export const background = {
+	light: {
+		body: mixColors("#FFFFFF", palette.grey["50"], 0.5),
+	},
+	dark: {
+		body: mixColors("#000000", palette.grey["900"], 0.5),
 	},
 };
