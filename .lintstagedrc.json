@@ -2,7 +2,16 @@
   "*.ts": [
     "npx eslint --fix"
   ],
+  "*.tsx": [
+    "npx eslint --fix"
+  ],
   "*.js": [
+    "npx eslint --fix"
+  ],
+  "*.cjs": [
+    "npx eslint --fix"
+  ],
+  "*.mjs": [
     "npx eslint --fix"
   ],
   "package.json": [
