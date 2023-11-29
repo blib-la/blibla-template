@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import type { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { appWithTranslation } from "next-i18next";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { SWRConfig } from "swr";
 
 import { DataProvider } from "@/ions/contexts/data";

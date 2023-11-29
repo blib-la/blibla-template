@@ -1,5 +1,5 @@
 import type { SxProps } from "@mui/joy/styles/types";
-import type { Image as SanityImage } from "@sanity/types/src";
+import type { Image as SanityImage } from "@sanity/types";
 import type { ImageProps } from "next/image";
 import type { Except } from "type-fest";
 

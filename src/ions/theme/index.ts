@@ -152,6 +152,11 @@ export const theme = extendTheme({
 				root: { borderRadius: 0 },
 			},
 		},
+		JoyButtonGroup: {
+			styleOverrides: {
+				root: { borderRadius: 0 },
+			},
+		},
 		JoyCard: {
 			defaultProps: {
 				variant: "plain",

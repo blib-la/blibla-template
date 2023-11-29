@@ -1,5 +1,4 @@
 import Head from "next/head";
-import React from "react";
 
 import { OpenGraph } from "@/molecules/open-graph";
 import { Footer } from "@/organisms/footer";

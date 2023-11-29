@@ -1,6 +1,5 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React from "react";
 
 import { getRawAsPath } from "@/ions/router/path";
 

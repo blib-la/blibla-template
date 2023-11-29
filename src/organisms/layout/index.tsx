@@ -1,6 +1,5 @@
 import type { BoxProps } from "@mui/joy/Box";
 import type { ReactNode } from "react";
-import React from "react";
 
 import { BaseLayout } from "@/organisms/layout/base";
 import { StyledContainer } from "@/organisms/layout/styled";
