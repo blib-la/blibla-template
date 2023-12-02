@@ -8,7 +8,6 @@
     "plugin:unicorn/recommended",
     "plugin:prettier/recommended",
     "next/core-web-vitals"
-
   ],
   "env": {
     "browser": true,
@@ -70,22 +69,23 @@
       "error",
       {
         "case": "kebabCase",
-        "ignore": [
-          "^\\[.*\\]\\.tsx?$"
-        ]
+        "ignore": ["^\\[.*\\]\\.tsx?$"]
       }
     ],
-    "react/jsx-sort-props": ["error", {
-      "callbacksLast":true,
-      "shorthandFirst": true,
-      "multiline": "last",
-      "reservedFirst": true,
-      "noSortAlphabetically": true
-    }]
+    "react/jsx-sort-props": [
+      "error",
+      {
+        "callbacksLast": true,
+        "shorthandFirst": true,
+        "multiline": "last",
+        "reservedFirst": true,
+        "noSortAlphabetically": true
+      }
+    ]
   },
   "overrides": [
     {
-      "files": ["sanity.cli.ts","next-i18next.config.js"],
+      "files": ["sanity.cli.ts", "next-i18next.config.js"],
       "rules": {
         "unicorn/prefer-module": "off",
         "unicorn/no-null": "off"
