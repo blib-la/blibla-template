@@ -38,15 +38,15 @@ export default defineType({
 								title: "URL",
 								name: "href",
 								type: "url",
-								// Hacky URL validation to allow relative and external links
 								validation: Rule =>
 									Rule.uri({
 										scheme: ["https", "mailto"],
-										allowRelative: true,
-									}).warning(),
+									}),
 							},
 						],
 					},
+					{ name: "page", title: "Page", type: "reference", to: { type: "page" } },
+					{ name: "post", title: "Post", type: "reference", to: { type: "post" } },
 				],
 			},
 		}),
@@ -77,6 +77,11 @@ export default defineType({
 			options: {
 				hotspot: true, // Enables image cropping
 			},
+		}),
+		defineArrayMember({
+			title: "Reference",
+			type: "reference",
+			to: [{ type: "person" }],
 		}),
 	],
 });
