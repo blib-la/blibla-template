@@ -5,7 +5,7 @@ import JoyLink from "@mui/joy/Link";
 import Typography from "@mui/joy/Typography";
 import type { PortableTextComponents, PortableTextProps } from "@portabletext/react";
 import { PortableText } from "@portabletext/react";
-import type { Image as SanityImage } from "@sanity/types/src";
+import type { Image as SanityImage } from "@sanity/types";
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
 
