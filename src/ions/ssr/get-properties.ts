@@ -2,9 +2,8 @@ import dayjs from "dayjs";
 import type { GetServerSidePropsContext, GetStaticPropsContext } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import index18Next from "../../../next-i18next.config";
-
 import { uniqueArray } from "@/ions/utils/array";
+import index18Next from "~/next-i18next.config";
 import { getClient } from "~/sanity/lib/client";
 import { getAddress, getNavigation } from "~/sanity/lib/get";
 import "@/ions/date";

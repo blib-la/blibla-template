@@ -1,4 +1,4 @@
-import { defineArrayMember, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 export default defineType({
 	title: "Block Content",
@@ -38,17 +38,50 @@ export default defineType({
 								title: "URL",
 								name: "href",
 								type: "url",
-								// Hacky URL validation to allow relative and external links
 								validation: Rule =>
 									Rule.uri({
 										scheme: ["https", "mailto"],
-										allowRelative: true,
-									}).warning(),
+									}),
 							},
 						],
 					},
+					{ name: "page", title: "Page", type: "reference", to: { type: "page" } },
+					{ name: "post", title: "Post", type: "reference", to: { type: "post" } },
 				],
 			},
+		}),
+		defineArrayMember({
+			title: "Image",
+			type: "image",
+			fields: [
+				{
+					title: "Alt Text",
+					name: "alt",
+					type: "string",
+				},
+				{
+					title: "Caption",
+					name: "caption",
+					type: "text",
+				},
+				defineField({
+					title: "Float",
+					name: "float",
+					type: "string",
+					initialValue: "none",
+					options: {
+						list: ["none", "left", "right"],
+					},
+				}),
+			],
+			options: {
+				hotspot: true, // Enables image cropping
+			},
+		}),
+		defineArrayMember({
+			title: "Reference",
+			type: "reference",
+			to: [{ type: "person" }],
 		}),
 	],
 });

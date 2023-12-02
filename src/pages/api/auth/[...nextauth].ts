@@ -8,9 +8,8 @@ import nextAuth from "next-auth";
 import githubProvider from "next-auth/providers/github";
 import googleProvider from "next-auth/providers/google";
 
-import index18Next from "../../../../next-i18next.config";
-
 import prismaClient from "@/ions/prisma/client";
+import index18Next from "~/next-i18next.config";
 
 async function createProfile(user: User, language: string) {
 	try {

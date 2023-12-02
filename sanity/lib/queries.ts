@@ -13,7 +13,27 @@ export const postBySlugQuery = groq`*[_type == "post" && slug.current == $slug][
 	mainImage,
 	"seo": seo[_key == $locale][0].value,
 	"headline": headline[_key == $locale][0].value,
-	"body": body[_key == $locale][0].value,
+	"body": body[_key == $locale].value[] {
+		...,
+		markDefs[]{
+			...,
+			_type == 'page' => @->{
+				"route": route.current
+			},
+			_type == 'post' => @->{
+				"slug": slug.current
+			},
+		},
+		_type == 'reference' => @->{
+			...,
+			...select(
+				_type == "person" => {
+					"pronouns": pronouns[_key == $locale][0].value,
+					"position": position[_key == $locale][0].value,
+				}
+			)
+		}
+	}
 }`;
 
 export const pageByRouteQuery = groq`
@@ -26,7 +46,7 @@ export const pageByRouteQuery = groq`
 	route,
 	"headline": headline[_key == $locale && ^.template == "0"][0].value,
 	"body": body[_key == $locale && ^.template == "0"][0].value,
- "stage":	stage->{
+	"stage": stage->{
 		title,
 		darkImage,
 		lightImage,
@@ -100,12 +120,23 @@ export const pageByRouteQuery = groq`
 						_type,
 						"id": _key,
 						...@->{
-							"body": [body[_key == $locale].value][0][0],
+							"body": body[_key == $locale].value[] {
+								...,
+								markDefs[]{
+									...,
+									_type == 'page' => @->{
+										"route": route.current
+									},
+									_type == 'post' => @->{
+										"slug": slug.current
+									},
+								}
+							}
 						}
 					}
 				}
 			},
-			_type == "simpleText" =>{
+			_type == "simpleText" => {
 				...@->{
 					"text": [text[_key == $locale].value][0][0],
 					level,
@@ -113,9 +144,29 @@ export const pageByRouteQuery = groq`
 					alignment
 				}
 			},
-			_type == "richText" =>{
+			_type == "richText" => {
 				...@->{
-					"body": [body[_key == $locale].value][0][0],
+					"body": body[_key == $locale].value[] {
+						...,
+						markDefs[]{
+							...,
+							_type == 'page' => @->{
+								"route": route.current
+							},
+							_type == 'post' => @->{
+								"slug": slug.current
+							},
+						},
+						_type == 'reference' => @->{
+							...,
+							...select(
+								_type == "person" => {
+									"pronouns": pronouns[_key == $locale][0].value,
+									"position": position[_key == $locale][0].value,
+								}
+							)
+						}
+					}
 				}
 			},
 			_type == "link" => {
@@ -147,7 +198,18 @@ export const pageByRouteQuery = groq`
 					"mainImage": mainImage{
 						...
 					},
-					"body": [body[_key == $locale].value][0][0],
+					"body": body[_key == $locale].value[] {
+						...,
+						markDefs[]{
+							...,
+							_type == 'page' => @->{
+								"route": route.current
+							},
+							_type == 'post' => @->{
+								"slug": slug.current
+							},
+						}
+					},
 					"cta": cta->route.current,
 					"slug": entry->slug.current,
 				},
@@ -162,7 +224,18 @@ export const pageByRouteQuery = groq`
 					linkedin,
 					github,
 					"mainImage": coalesce(mainImage, entry->mainImage),
-					"bio": [bio[_key == $locale].value][0][0],
+					"bio": bio[_key == $locale].value[] {
+						...,
+						markDefs[]{
+							...,
+							_type == 'page' => @->{
+								"route": route.current
+							},
+							_type == 'post' => @->{
+								"slug": slug.current
+							},
+						}
+					},
 				},
 			},
 			_type == "spotImage" => {
