@@ -1,4 +1,4 @@
-import { defineArrayMember, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 export default defineType({
 	title: "Block Content",
@@ -48,6 +48,34 @@ export default defineType({
 						],
 					},
 				],
+			},
+		}),
+		defineArrayMember({
+			title: "Image",
+			type: "image",
+			fields: [
+				{
+					title: "Alt Text",
+					name: "alt",
+					type: "string",
+				},
+				{
+					title: "Caption",
+					name: "caption",
+					type: "text",
+				},
+				defineField({
+					title: "Float",
+					name: "float",
+					type: "string",
+					initialValue: "none",
+					options: {
+						list: ["none", "left", "right"],
+					},
+				}),
+			],
+			options: {
+				hotspot: true, // Enables image cropping
 			},
 		}),
 	],

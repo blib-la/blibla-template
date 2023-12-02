@@ -2,14 +2,55 @@ import JoyLink from "@mui/joy/Link";
 import Typography from "@mui/joy/Typography";
 import type { PortableTextComponents, PortableTextProps } from "@portabletext/react";
 import { PortableText } from "@portabletext/react";
+import type { Image as SanityImage } from "@sanity/types/src";
 import Link from "next/link";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
+
+import { Box } from "@/molecules/box";
+import { SanityNextImage } from "@/molecules/image";
+import { getImageSize } from "~/sanity/lib/image";
 
 export interface ComponentProperties {
 	children?: ReactNode;
 }
 
 export const components: PortableTextComponents = {
+	types: {
+		image({ value }: { value: SanityImage }) {
+			const { width, height } = getImageSize(value.asset!._ref);
+
+			return (
+				<Box
+					as="figure"
+					sx={{
+						float: { sm: value.float as CSSProperties["float"] },
+						width: { xs: "100%", sm: value.float === "none" ? undefined : "50%" },
+						mr: { xs: 0, sm: value.float === "left" ? 2 : 0 },
+						ml: { xs: 0, sm: value.float === "right" ? 2 : 0 },
+						my: { sm: 1 },
+					}}
+				>
+					<SanityNextImage
+						alt={(value.alt as string) ?? ""}
+						fill={false}
+						height={height}
+						width={width}
+						image={value}
+					/>
+					{Boolean(value.caption) && (
+						<Typography
+							component="figcaption"
+							level="body-xs"
+							variant="soft"
+							sx={{ p: 2 }}
+						>
+							{value.caption as string}
+						</Typography>
+					)}
+				</Box>
+			);
+		},
+	},
 	list: {
 		bullet: ({ children }: ComponentProperties) => (
 			<Typography component="ul" my={1}>
@@ -43,6 +84,7 @@ export const components: PortableTextComponents = {
 				<Link legacyBehavior passHref href={value?.href}>
 					<JoyLink
 						target={target}
+						underline="always"
 						rel={target === "_blank" ? "noindex nofollow" : undefined}
 					>
 						{children}

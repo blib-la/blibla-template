@@ -26,7 +26,7 @@ export const pageByRouteQuery = groq`
 	route,
 	"headline": headline[_key == $locale && ^.template == "0"][0].value,
 	"body": body[_key == $locale && ^.template == "0"][0].value,
- "stage":	stage->{
+	"stage": stage->{
 		title,
 		darkImage,
 		lightImage,
